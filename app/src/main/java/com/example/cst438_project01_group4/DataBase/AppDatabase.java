@@ -31,6 +31,4 @@ public abstract class AppDatabase extends RoomDatabase {
     public abstract GradeDAO getGradeDAO();
     public abstract GradeCategoryDAO getGradeCategoryDAO();
     public abstract UserDAO getUserDAO();
-
-    public static final String dbUserName = "userDB";
 }
