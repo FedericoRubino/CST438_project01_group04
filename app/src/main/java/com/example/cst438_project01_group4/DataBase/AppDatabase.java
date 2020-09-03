@@ -12,7 +12,7 @@ import com.example.cst438_project01_group4.ClassObjects.GradeCategory;
 import com.example.cst438_project01_group4.ClassObjects.User;
 import com.example.cst438_project01_group4.DataBase.TypeConverters.DateTypeConverter;
 
-@Database(entities = {Assignment.class, Course.class, Enrollment.class, Grade.class, GradeCategory.class, User.class},version = 1)
+@Database(entities = {Assignment.class, Course.class, Enrollment.class, Grade.class, GradeCategory.class, User.class},version = 3)
 @TypeConverters(DateTypeConverter.class)
 public abstract class AppDatabase extends RoomDatabase {
 
