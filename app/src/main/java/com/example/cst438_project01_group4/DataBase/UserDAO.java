@@ -21,6 +21,9 @@ public interface UserDAO {
     @Update
     public void update(User user);
 
+    @Query("SELECT * FROM " + AppDatabase.USER_TABLE + " WHERE username = :usernameField")
+    User getUserByUsername(String usernameField);
+
     @Query("SELECT * FROM " + AppDatabase.USER_TABLE)
     public List<User> getAllUsers();
 }
