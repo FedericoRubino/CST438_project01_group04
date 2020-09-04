@@ -27,5 +27,4 @@ public abstract class AppDatabase extends RoomDatabase {
     public static final String USER_TABLE = "user";
 
     // abstract getter methods for the different DAOs
-    public abstract GradeAppDAO getGradeAppDAO();
 }
