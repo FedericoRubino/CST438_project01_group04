@@ -12,10 +12,12 @@ import com.example.cst438_project01_group4.ClassObjects.GradeCategory;
 import com.example.cst438_project01_group4.ClassObjects.User;
 import com.example.cst438_project01_group4.DataBase.TypeConverters.DateTypeConverter;
 
-@Database(entities = {Assignment.class, Course.class, Enrollment.class, Grade.class, GradeCategory.class, User.class},version = 3)
+@Database(entities = {Assignment.class, Course.class, Enrollment.class, Grade.class, GradeCategory.class, User.class},version = 6)
 @TypeConverters(DateTypeConverter.class)
 public abstract class AppDatabase extends RoomDatabase {
 
+
+    public static final String DB_NAME = "gradeAppDAO";
     // The names of the tables
     public static final String ASSIGNMENT_TABLE = "assignment";
     public static final String COURSE_TABLE = "course";
@@ -25,10 +27,5 @@ public abstract class AppDatabase extends RoomDatabase {
     public static final String USER_TABLE = "user";
 
     // abstract getter methods for the different DAOs
-    public abstract AssignmentDAO getAssignmentDAO();
-    public abstract CourseDAO getCourseDAO();
-    public abstract EnrollmentDao getEnrollmentDAO();
-    public abstract GradeDAO getGradeDAO();
-    public abstract GradeCategoryDAO getGradeCategoryDAO();
-    public abstract UserDAO getUserDAO();
+    public abstract GradeAppDAO getGradeAppDAO();
 }
