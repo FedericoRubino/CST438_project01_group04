@@ -73,4 +73,13 @@ public class Course {
     public void setEndDate(Date endDate) {
         this.endDate = endDate;
     }
+
+    @Override
+    public String toString() {
+        return "Course{" +
+                "instructor='" + instructor + '\'' +
+                ", title='" + title + '\'' +
+                ", description='" + description + '\'' +
+                '}';
+    }
 }
