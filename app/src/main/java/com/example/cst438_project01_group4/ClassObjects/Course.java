@@ -76,10 +76,6 @@ public class Course {
 
     @Override
     public String toString() {
-        return "Course{" +
-                "instructor='" + instructor + '\'' +
-                ", title='" + title + '\'' +
-                ", description='" + description + '\'' +
-                '}';
+        return title + "\n" + instructor + "\n" + description + "\n";
     }
 }
