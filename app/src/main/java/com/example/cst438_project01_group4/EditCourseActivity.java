@@ -1,11 +1,13 @@
 package com.example.cst438_project01_group4;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.room.Room;
 
@@ -24,6 +26,11 @@ public class EditCourseActivity extends AppCompatActivity {
     private EditText mDescription;
     private EditText mStart;
     private EditText mEnd;
+    private String courseName;
+    private String courseInstructor;
+    private String courseDescription;
+    private Date courseStartTime;
+    private Date courseEndTime;
 
 
     @Override
@@ -42,11 +49,11 @@ public class EditCourseActivity extends AppCompatActivity {
         getGradeAppDAO();
         editCourse = gradeAppDAO.getCourseById(courseId);
         if(editCourse != null){
-            String courseName = editCourse.getTitle();
-            String courseInstructor = editCourse.getInstructor();
-            String courseDescription = editCourse.getDescription();
-            Date courseStartTime = editCourse.getStartDate();
-            Date courseEndTime = editCourse.getEndDate();
+            courseName = editCourse.getTitle();
+            courseInstructor = editCourse.getInstructor();
+            courseDescription = editCourse.getDescription();
+            courseStartTime = editCourse.getStartDate();
+            courseEndTime = editCourse.getEndDate();
 
             mTitle.setHint(courseName);
             mInstructor.setHint(courseInstructor);
@@ -60,11 +67,76 @@ public class EditCourseActivity extends AppCompatActivity {
     public void confirm(View view){
         //This is where we check input
         //Then we update the database
+        final Course course = getNewCourseValues();
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Please confirm changes");
+        builder.setMessage(course.toString());
+        builder.setPositiveButton("CONFIRM", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                gradeAppDAO.update(course);
 
-        finish();
+                Intent intent = ManageCourses.getIntent(getApplicationContext(), "");
+                startActivity(intent);
+            }
+
+        });
+        builder.setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Intent intent = ManageCourses.getIntent(getApplicationContext(), "");
+                startActivity(intent);
+            }
+
+        });
+        AlertDialog dialog = builder.create();
+        dialog.show();
     }
 
+    private Course getNewCourseValues(){
+       String instructor;
+       String title;
+       String description;
+       Date startDate;
+       Date endDate;
 
+        if(!mTitle.getText().toString().isEmpty()){
+            title = mTitle.getText().toString();
+        }
+        else {
+            title = courseName;
+        }
+
+        if(!mInstructor.getText().toString().isEmpty()){
+            instructor = mInstructor.getText().toString();
+        }
+        else {
+            instructor = courseInstructor;
+        }
+
+        if(!mDescription.getText().toString().isEmpty()){
+            description = mDescription.getText().toString();
+        }
+        else {
+            description = courseDescription;
+        }
+
+//        if(!mStart.getText().toString().isEmpty()){
+//            startDate = new Date(mStart.getText().toString());
+//        }
+//        else {
+//            startDate = courseStartTime;
+//        }
+//
+//        if(!mEnd.toString().isEmpty()){
+//            endDate = new Date(mEnd.getText().toString());
+//        }
+//        else {
+//            endDate = courseEndTime;
+//        }
+
+        return new Course(editCourse.getUserID(), instructor, title, description, courseStartTime, courseEndTime);
+    }
 
     // Intent factory
     public static Intent getIntent(Context context, int value){
@@ -80,9 +152,5 @@ public class EditCourseActivity extends AppCompatActivity {
                 .allowMainThreadQueries()
                 .build()
                 .getGradeAppDao();
-    }
-
-    private String test(){
-        return "Hello";
     }
 }

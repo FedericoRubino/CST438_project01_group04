@@ -102,5 +102,4 @@ public class ManageCourses extends AppCompatActivity implements ItemClickListene
         return intent;
     }
 
-
 }

@@ -1,21 +1,17 @@
 package com.example.cst438_project01_group4;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.room.Database;
-import androidx.room.Room;
-
-import android.app.Application;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.room.Room;
 
 import com.example.cst438_project01_group4.ClassObjects.Course;
 import com.example.cst438_project01_group4.ClassObjects.User;
 import com.example.cst438_project01_group4.DataBase.AppDatabase;
 import com.example.cst438_project01_group4.DataBase.GradeAppDAO;
 
-import java.io.IOException;
 import java.util.Date;
 
 public class MainActivity extends AppCompatActivity {
@@ -36,10 +32,10 @@ public class MainActivity extends AppCompatActivity {
         mGradeAppDAO.deleteCourseTable();
 
         if(mGradeAppDAO.getAllCourses().isEmpty()){
-            mGradeAppDAO.insert(new Course("Dr.C", "cst538","The best there ever was", new Date(01,01,2018),new Date(01,01,2018)));
+            mGradeAppDAO.insert(new Course(111,"Dr.C", "cst538","The best there ever was", new Date(01,01,2018),new Date(01,01,2018)));
 
-            mGradeAppDAO.insert(new Course("Dr.C", "cst338","The best there ever was", new Date(01,01,2018),new Date(01,01,2018)));
-            mGradeAppDAO.insert(new Course("Dr.C", "cst438","The best there ever was", new Date(01,01,2018),new Date(01,01,2018)));
+            mGradeAppDAO.insert(new Course(111,"Dr.C", "cst338","The best there ever was", new Date(01,01,2018),new Date(01,01,2018)));
+            mGradeAppDAO.insert(new Course(111,"Dr.C", "cst438","The best there ever was", new Date(01,01,2018),new Date(01,01,2018)));
 //            mGradeAppDAO.insert(new Course("Dr.C", "cst438","The best there ever was", new Date(01/01/2018),null));
 //            mGradeAppDAO.insert(new Course("Dr.C", "cst201","The best there ever was", new Date(01/01/2018),null));
         }
