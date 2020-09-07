@@ -26,7 +26,7 @@ public class GradeAppAdapter extends RecyclerView.Adapter<GradeAppAdapter.ViewHo
         GradeAppAdapter.ViewHolder viewHolder = new GradeAppAdapter.ViewHolder(contactView);
         return viewHolder;
     }
-    
+
     // Involves populating data into the item through holder
     @Override
     public void onBindViewHolder(GradeAppAdapter.ViewHolder viewHolder, int position) {
@@ -36,7 +36,7 @@ public class GradeAppAdapter extends RecyclerView.Adapter<GradeAppAdapter.ViewHo
         TextView textView = viewHolder.logTextView;
         textView.setText(resItem.toString());
     }
-    
+
     // Returns the total count of items in the list
     @Override
     public int getItemCount() {
@@ -61,7 +61,7 @@ public class GradeAppAdapter extends RecyclerView.Adapter<GradeAppAdapter.ViewHo
             if (clickListener != null) clickListener.onClick(view, getAdapterPosition());
         }
     }
-    
+
     // Pass in the contact array into the constructor
     public GradeAppAdapter(List<Course> coursList) {
         mCoursesList = coursList;
