@@ -42,6 +42,9 @@ public interface GradeAppDAO {
     @Query("SELECT * FROM " + AppDatabase.COURSE_TABLE)
     public List<Course> getAllCourses();
 
+    @Query("DELETE FROM " + AppDatabase.COURSE_TABLE)
+    public void deleteCourseTable();
+
     @Insert
     public void insert(Enrollment enrollment);
 
