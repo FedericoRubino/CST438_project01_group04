@@ -18,12 +18,20 @@ public class Course {
     private Date startDate;
     private Date endDate;
 
-    public Course(String instructor, String title, String description, Date startDate, Date endDate) {
+    // TODO: add userID
+    private int userID;
+
+    public Course(int userID, String instructor, String title, String description, Date startDate, Date endDate) {
         this.instructor = instructor;
         this.title = title;
         this.description = description;
         this.startDate = startDate;
         this.endDate = endDate;
+        this.userID = userID;
+    }
+
+    public int getUserID() {
+        return userID;
     }
 
     public int getCourseID() {
