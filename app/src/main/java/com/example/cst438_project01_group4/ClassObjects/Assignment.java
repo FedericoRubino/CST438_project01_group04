@@ -19,7 +19,11 @@ public class Assignment {
     private int categroyID;
     private int courseID;
 
-    public Assignment(String details, int maxScore, double earnedScore, Date assignedDate, Date dueDate, int categroyID, int courseID) {
+    // added this after
+    private int gradeID;
+    private int userID; // TODO: finish the set up
+
+    public Assignment(int gradeId, String details, int maxScore, double earnedScore, Date assignedDate, Date dueDate, int categroyID, int courseID) {
         this.details = details;
         this.maxScore = maxScore;
         this.earnedScore = earnedScore;
@@ -27,6 +31,11 @@ public class Assignment {
         this.dueDate = dueDate;
         this.categroyID = categroyID;
         this.courseID = courseID;
+        this.gradeID = gradeId;
+    }
+
+    public int getGradeID() {
+        return gradeID;
     }
 
     public int getAssignmentID() {

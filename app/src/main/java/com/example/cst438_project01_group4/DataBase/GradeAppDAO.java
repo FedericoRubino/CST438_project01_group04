@@ -45,6 +45,10 @@ public interface GradeAppDAO {
     @Query("DELETE FROM " + AppDatabase.COURSE_TABLE)
     public void deleteCourseTable();
 
+    @Query("Select * FROM " + AppDatabase.COURSE_TABLE + " WHERE courseID = :courseId")
+    public Course getCourseById(int courseId);
+
+
     @Insert
     public void insert(Enrollment enrollment);
 
@@ -95,4 +99,10 @@ public interface GradeAppDAO {
 
     @Query("SELECT * FROM " + AppDatabase.USER_TABLE)
     public List<User> getAllUsers();
+
+
+    // get a list of assignments based on userID, courseID
+    @Query("Select * from " + AppDatabase.ASSIGNMENT_TABLE + " WHERE courseID = :courseID and userID = :userID")
+    public List<Assignment> getAssignmentsByCourseID(int courseID, int userID);
+
 }
