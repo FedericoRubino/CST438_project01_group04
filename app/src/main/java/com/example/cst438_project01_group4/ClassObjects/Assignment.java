@@ -2,9 +2,10 @@ package com.example.cst438_project01_group4.ClassObjects;
 
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
-import java.util.Date;
 
 import com.example.cst438_project01_group4.DataBase.AppDatabase;
+
+import java.util.Date;
 
 @Entity(tableName = AppDatabase.ASSIGNMENT_TABLE)
 public class Assignment {
@@ -16,26 +17,39 @@ public class Assignment {
     private double earnedScore;
     private Date assignedDate;
     private Date dueDate;
-    private int categroyID;
+    private int categoryID;
     private int courseID;
 
     // added this after
     private int gradeID;
-    private int userID; // TODO: finish the set up
+    private int userID;
 
-    public Assignment(int gradeId, String details, int maxScore, double earnedScore, Date assignedDate, Date dueDate, int categroyID, int courseID) {
+    public Assignment(String details, int maxScore, double earnedScore, Date assignedDate, Date dueDate, int categoryID, int courseID, int gradeID, int userID) {
         this.details = details;
         this.maxScore = maxScore;
         this.earnedScore = earnedScore;
         this.assignedDate = assignedDate;
         this.dueDate = dueDate;
-        this.categroyID = categroyID;
+        this.categoryID = categoryID;
         this.courseID = courseID;
-        this.gradeID = gradeId;
+        this.gradeID = gradeID;
+        this.userID = userID;
+    }
+
+    public int getUserID() {
+        return userID;
+    }
+
+    public void setUserID(int userID) {
+        this.userID = userID;
     }
 
     public int getGradeID() {
         return gradeID;
+    }
+
+    public void setGradeID(int gradeID) {
+        this.gradeID = gradeID;
     }
 
     public int getAssignmentID() {
@@ -86,12 +100,12 @@ public class Assignment {
         this.dueDate = dueDate;
     }
 
-    public int getCategroyID() {
-        return categroyID;
+    public int getCategoryID() {
+        return categoryID;
     }
 
-    public void setCategroyID(int categroyID) {
-        this.categroyID = categroyID;
+    public void setCategoryID(int categroyID) {
+        this.categoryID = categroyID;
     }
 
     public int getCourseID() {

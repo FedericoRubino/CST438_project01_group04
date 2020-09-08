@@ -4,7 +4,6 @@ import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
-import androidx.room.Transaction;
 import androidx.room.Update;
 
 import com.example.cst438_project01_group4.ClassObjects.Assignment;
@@ -104,5 +103,9 @@ public interface GradeAppDAO {
     // get a list of assignments based on userID, courseID
     @Query("Select * from " + AppDatabase.ASSIGNMENT_TABLE + " WHERE courseID = :courseID and userID = :userID")
     public List<Assignment> getAssignmentsByCourseID(int courseID, int userID);
+
+    // get a grade based on assignmentID
+    @Query("Select * from " + AppDatabase.GRADE_TABLE + " WHERE courseID = :assignmentID")
+    public Grade getGradeByAssignmentID(int assignmentID);
 
 }

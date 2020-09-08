@@ -17,8 +17,6 @@ public class Course {
     private String description;
     private Date startDate;
     private Date endDate;
-
-    // TODO: add userID
     private int userID;
 
     public Course(int userID, String instructor, String title, String description, Date startDate, Date endDate) {
