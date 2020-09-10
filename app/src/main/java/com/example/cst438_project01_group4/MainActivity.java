@@ -81,7 +81,7 @@ public class MainActivity extends AppCompatActivity {
                         pass = false;
                     }
                     if(pass){
-                        Intent intent = new Intent(MainActivity.this, LandingActivity.class);
+                        Intent intent = new Intent(MainActivity.this, ManageCourses.class);
                         startActivity(intent);
                     }
                 }
