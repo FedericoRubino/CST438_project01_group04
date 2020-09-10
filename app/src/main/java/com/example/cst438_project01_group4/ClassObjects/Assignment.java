@@ -24,7 +24,7 @@ public class Assignment {
     private int gradeID;
     private int userID;
 
-    public Assignment(String details, int maxScore, double earnedScore, Date assignedDate, Date dueDate, int categoryID, int courseID, int gradeID, int userID) {
+    public Assignment(String details, int maxScore, double earnedScore, Date assignedDate, Date dueDate, int categoryID, int courseID, int userID) {
         this.details = details;
         this.maxScore = maxScore;
         this.earnedScore = earnedScore;
@@ -32,7 +32,6 @@ public class Assignment {
         this.dueDate = dueDate;
         this.categoryID = categoryID;
         this.courseID = courseID;
-        this.gradeID = gradeID;
         this.userID = userID;
     }
 
@@ -114,5 +113,10 @@ public class Assignment {
 
     public void setCourseID(int courseID) {
         this.courseID = courseID;
+    }
+
+    @Override
+    public String toString() {
+        return details + "\n" + maxScore + "\n" + earnedScore + "\n";
     }
 }
