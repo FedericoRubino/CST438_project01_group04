@@ -4,23 +4,22 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".EditCourseActivity">
+    tools:context=".EditAssignmentActivity">
 
     <TextView
-        android:id="@+id/EditCoursePrompt"
+        android:id="@+id/EditAssignmentPrompt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
-        android:text="@string/EditCoursePrompt"
+        android:text="@string/EditAssignmentPrompt"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <!-- android:hint="get course name" -->
     <EditText
-        android:id="@+id/courseNameEditText"
+        android:id="@+id/AssignmentDetailsEditText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -30,48 +29,75 @@
         android:inputType="text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/EditCoursePrompt" />
+        app:layout_constraintTop_toBottomOf="@+id/EditAssignmentPrompt" />
 
-    <!--android:hint="get instructor name" -->
     <EditText
-        android:id="@+id/InstructorNameEditText"
+        android:id="@+id/MaxScoreEditText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         android:ems="10"
-        android:inputType="text"
+        android:inputType="numberDecimal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/courseNameEditText" />
+        app:layout_constraintTop_toBottomOf="@+id/AssignmentDetailsEditText" />
 
-    <!--android:hint="get course description" -->
     <EditText
-        android:id="@+id/CourseDescriptionEditText"
+        android:id="@+id/EarnedScoreEditText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         android:ems="10"
-        android:inputType="text"
+        android:inputType="numberDecimal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/InstructorNameEditText" />
+        app:layout_constraintTop_toBottomOf="@+id/MaxScoreEditText" />
+
+
+    <Spinner
+        android:id="@+id/categories_spinner"
+        android:layout_width="211dp"
+        android:layout_height="32dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/EarnedScoreEditText" />
 
     <Button
-        android:id="@+id/enterUpdate"
+        android:id="@+id/enterAssignmentUpdate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="32dp"
         android:layout_marginEnd="16dp"
+        android:layout_marginBottom="184dp"
+        android:onClick="confirm"
         android:text="@string/enterUpdate"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/categories_spinner" />
+
+    <Space
+        android:id="@+id/space"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="53dp"
+        app:layout_constraintBottom_toTopOf="@+id/enterAssignmentUpdate"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/CourseDescriptionEditText"
-        android:onClick="confirm"
-        />
+        app:layout_constraintTop_toBottomOf="@+id/categories_spinner" />
+
+    <Space
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@+id/enterAssignmentUpdate"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/categories_spinner" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

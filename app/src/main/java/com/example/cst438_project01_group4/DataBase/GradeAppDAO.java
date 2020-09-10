@@ -29,6 +29,9 @@ public interface GradeAppDAO {
     @Query("SELECT * FROM " + AppDatabase.ASSIGNMENT_TABLE)
     public List<Assignment> getAllAssignments();
 
+    @Query("Select * FROM " + AppDatabase.ASSIGNMENT_TABLE + " WHERE courseID = :assignmentId")
+    public Assignment getAssignmentById(int assignmentId);
+
     @Insert
     public void insert(Course course);
 
@@ -69,8 +72,17 @@ public interface GradeAppDAO {
     @Update
     public void update(GradeCategory gradeCategory);
 
+    @Query("Select * FROM " + AppDatabase.GRADE_CATEGORY_TABLE + " WHERE categoryID = :categoryId")
+    public GradeCategory getGradeCategoryById(int categoryId);
+
     @Query("SELECT * FROM " + AppDatabase.GRADE_CATEGORY_TABLE)
     public List<GradeCategory> getAllGradeCategorys();
+
+    @Query("Select * from " + AppDatabase.GRADE_CATEGORY_TABLE + " WHERE courseID = :courseID")
+    public List<GradeCategory> getAllGradeCategoriesByCourseID(int courseID);
+
+    @Query("Select * from " + AppDatabase.GRADE_CATEGORY_TABLE + " WHERE title = :categoryName")
+    public GradeCategory getGradeCategoryByName(String categoryName);
 
     @Insert
     public void insert(Grade grade);

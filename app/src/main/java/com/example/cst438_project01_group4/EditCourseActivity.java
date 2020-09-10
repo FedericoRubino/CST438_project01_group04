@@ -24,8 +24,6 @@ public class EditCourseActivity extends AppCompatActivity {
     private EditText mTitle;
     private EditText mInstructor;
     private EditText mDescription;
-    private EditText mStart;
-    private EditText mEnd;
     private String courseName;
     private String courseInstructor;
     private String courseDescription;
@@ -41,10 +39,8 @@ public class EditCourseActivity extends AppCompatActivity {
         int courseId = intent.getIntExtra("EXTRA", -1);
         // this is what Federico is adding
         mTitle = findViewById(R.id.courseNameEditText);
-        mInstructor = findViewById(R.id.InstructorNameEditText);;
-        mDescription = findViewById(R.id.CourseDescriptionEditText);;
-        mStart = findViewById(R.id.CourseStartTimeEditText);;
-        mEnd = findViewById(R.id.CourseEndEditText);;
+        mInstructor = findViewById(R.id.InstructorNameEditText);
+        mDescription = findViewById(R.id.CourseDescriptionEditText);
 
         getGradeAppDAO();
         editCourse = gradeAppDAO.getCourseById(courseId);
@@ -58,8 +54,6 @@ public class EditCourseActivity extends AppCompatActivity {
             mTitle.setHint(courseName);
             mInstructor.setHint(courseInstructor);
             mDescription.setHint(courseDescription);
-            mStart.setHint(courseStartTime.toString());
-            mEnd.setHint(courseEndTime.toString());
         }
     }
 
@@ -67,15 +61,15 @@ public class EditCourseActivity extends AppCompatActivity {
     public void confirm(View view){
         //This is where we check input
         //Then we update the database
-        final Course course = getNewCourseValues();
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Please confirm changes");
+        Course course = getNewCourseValues();
         builder.setMessage(course.toString());
         builder.setPositiveButton("CONFIRM", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                gradeAppDAO.update(course);
-
+                updateCourse();
+                gradeAppDAO.update(editCourse);
                 Intent intent = ManageCourses.getIntent(getApplicationContext(), "");
                 startActivity(intent);
             }
@@ -121,21 +115,22 @@ public class EditCourseActivity extends AppCompatActivity {
             description = courseDescription;
         }
 
-//        if(!mStart.getText().toString().isEmpty()){
-//            startDate = new Date(mStart.getText().toString());
-//        }
-//        else {
-//            startDate = courseStartTime;
-//        }
-//
-//        if(!mEnd.toString().isEmpty()){
-//            endDate = new Date(mEnd.getText().toString());
-//        }
-//        else {
-//            endDate = courseEndTime;
-//        }
-
         return new Course(editCourse.getUserID(), instructor, title, description, courseStartTime, courseEndTime);
+    }
+
+    private void updateCourse(){
+
+        if(!mTitle.getText().toString().isEmpty()){
+            editCourse.setTitle(mTitle.getText().toString());
+        }
+
+        if(!mInstructor.getText().toString().isEmpty()){
+            editCourse.setInstructor(mInstructor.getText().toString());
+        }
+
+        if(!mDescription.getText().toString().isEmpty()){
+            editCourse.setDescription(mDescription.getText().toString());
+        }
     }
 
     // Intent factory

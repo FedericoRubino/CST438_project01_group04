@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 7,
-    "identityHash": "e110787ad4015dae286e1cd978681b04",
+    "identityHash": "6fcc5f6b6e81d7024ed1a3e0aaab357f",
     "entities": [
       {
         "tableName": "assignment",
@@ -174,7 +174,7 @@
       },
       {
         "tableName": "grade",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`gradeID` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `score` INTEGER NOT NULL, `assignmentID` INTEGER NOT NULL, `courseID` INTEGER NOT NULL, `dateEarned` INTEGER)",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`gradeID` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `score` REAL NOT NULL, `assignmentID` INTEGER NOT NULL, `courseID` INTEGER NOT NULL, `dateEarned` INTEGER)",
         "fields": [
           {
             "fieldPath": "gradeID",
@@ -185,7 +185,7 @@
           {
             "fieldPath": "score",
             "columnName": "score",
-            "affinity": "INTEGER",
+            "affinity": "REAL",
             "notNull": true
           },
           {
@@ -218,7 +218,7 @@
       },
       {
         "tableName": "gradeCategory",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`categoryID` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `title` TEXT, `weight` REAL NOT NULL, `gradeID` INTEGER NOT NULL, `assignmentDate` INTEGER)",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`categoryID` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `title` TEXT, `weight` REAL NOT NULL, `courseID` INTEGER NOT NULL)",
         "fields": [
           {
             "fieldPath": "categoryID",
@@ -239,16 +239,10 @@
             "notNull": true
           },
           {
-            "fieldPath": "gradeID",
-            "columnName": "gradeID",
+            "fieldPath": "courseID",
+            "columnName": "courseID",
             "affinity": "INTEGER",
             "notNull": true
-          },
-          {
-            "fieldPath": "assignmentDate",
-            "columnName": "assignmentDate",
-            "affinity": "INTEGER",
-            "notNull": false
           }
         ],
         "primaryKey": {
@@ -308,7 +302,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'e110787ad4015dae286e1cd978681b04')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '6fcc5f6b6e81d7024ed1a3e0aaab357f')"
     ]
   }
 }

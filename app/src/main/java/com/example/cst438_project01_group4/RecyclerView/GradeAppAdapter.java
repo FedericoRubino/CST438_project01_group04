@@ -27,6 +27,8 @@ public class GradeAppAdapter extends RecyclerView.Adapter<GradeAppAdapter.ViewHo
         return viewHolder;
     }
 
+    
+
     // Involves populating data into the item through holder
     @Override
     public void onBindViewHolder(GradeAppAdapter.ViewHolder viewHolder, int position) {

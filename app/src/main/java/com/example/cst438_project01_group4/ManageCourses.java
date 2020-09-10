@@ -22,12 +22,12 @@ import java.util.List;
 
 public class ManageCourses extends AppCompatActivity implements ItemClickListener {
 
-    private RecyclerView recyclerView;
-    private GradeAppAdapter mAdapter;
+    private static RecyclerView recyclerView;
+    private static GradeAppAdapter mAdapter;
     private RecyclerView.LayoutManager layoutManager;
 
     private GradeAppDAO gradeAppDAO;
-    private List<Course> courses;
+    private static List<Course> courses;
     private Course clickedCourse;
 
     @Override
@@ -93,6 +93,8 @@ public class ManageCourses extends AppCompatActivity implements ItemClickListene
                 .build()
                 .getGradeAppDao();
     }
+
+
 
     // Intent factory
     public static Intent getIntent(Context context, String value){

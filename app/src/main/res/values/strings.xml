@@ -3,4 +3,5 @@
     <string name="EditCoursePrompt">Edit Course</string>
     <string name="enterUpdate">Update</string>
     <string name="CourseDetails">Course Details</string>
+    <string name="EditAssignmentPrompt">Assignment Details</string>
 </resources>
