@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">CST438_project01_group4</string>
+    <string name="EditCoursePrompt">Edit Course</string>
+    <string name="enterUpdate">Update</string>
+    <string name="CourseDetails">Course Details</string>
+    <string name="EditAssignmentPrompt">Assignment Details</string>
 </resources>

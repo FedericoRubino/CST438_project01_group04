@@ -17,13 +17,19 @@ public class Course {
     private String description;
     private Date startDate;
     private Date endDate;
+    private int userID;
 
-    public Course(String instructor, String title, String description, Date startDate, Date endDate) {
+    public Course(int userID, String instructor, String title, String description, Date startDate, Date endDate) {
         this.instructor = instructor;
         this.title = title;
         this.description = description;
         this.startDate = startDate;
         this.endDate = endDate;
+        this.userID = userID;
+    }
+
+    public int getUserID() {
+        return userID;
     }
 
     public int getCourseID() {
@@ -72,5 +78,10 @@ public class Course {
 
     public void setEndDate(Date endDate) {
         this.endDate = endDate;
+    }
+
+    @Override
+    public String toString() {
+        return title + "\n" + instructor + "\n" + description + "\n";
     }
 }
