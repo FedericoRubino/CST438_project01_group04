@@ -2,6 +2,9 @@ package com.example.cst438_project01_group4;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -20,6 +23,10 @@ import java.util.Date;
 public class MainActivity extends AppCompatActivity {
 
     private GradeAppDAO mGradeAppDAO;
+    private EditText Username;
+    private EditText Password;
+    private Button Login;
+    private Button Register;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,7 +61,40 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);
         }
 
+        Username = (EditText)findViewById(R.id.etUsername);
+        Password = (EditText)findViewById(R.id.etPassword);
+        Login = (Button)findViewById(R.id.btnLogin);
+        Register = (Button)findViewById(R.id.btnRegister);
 
+        Login.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                boolean pass = true;
+                if(checkForUserInDatabase(Username.getText().toString())){
+                    User account = mGradeAppDAO.getUserByUsername(Username.getText().toString());
+                    if(!Username.getText().toString().equals(account.getUsername())){
+                        Username.setError("Incorrect username!!!");
+                        pass = false;
+                    }
+                    if(!Password.getText().toString().equals(account.getPassword())){
+                        Password.setError("Incorrect password!!!");
+                        pass = false;
+                    }
+                    if(pass){
+                        Intent intent = new Intent(MainActivity.this, LandingActivity.class);
+                        startActivity(intent);
+                    }
+                }
+            }
+        });
+
+        Register.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, RegisterActivity.class);
+                startActivity(intent);
+            }
+        });
 
     }
 
@@ -62,7 +102,7 @@ public class MainActivity extends AppCompatActivity {
         User mUser;
         mUser = mGradeAppDAO.getUserByUsername(username);
         if(mUser == null){
-            //Toast.makeText(this, "no user " + "username" + " found", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "no user " + "username" + " found, you need to register an account", Toast.LENGTH_LONG).show();
             return false;
         }
         else {
