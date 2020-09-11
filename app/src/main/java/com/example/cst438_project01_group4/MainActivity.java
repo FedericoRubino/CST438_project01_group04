@@ -81,7 +81,7 @@ public class MainActivity extends AppCompatActivity {
                         pass = false;
                     }
                     if(pass){
-                        Intent intent = new Intent(MainActivity.this, LandingActivity.class);
+                        Intent intent = new Intent(MainActivity.this, ManageCourses.class);
                         startActivity(intent);
                     }
                 }
@@ -98,6 +98,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    //function that checks if the given username is in the database
     private boolean checkForUserInDatabase(String username){
         User mUser;
         mUser = mGradeAppDAO.getUserByUsername(username);
@@ -109,6 +110,11 @@ public class MainActivity extends AppCompatActivity {
             //Toast.makeText(this, mUser.getUsername() + " found", Toast.LENGTH_LONG).show();
             return true;
         }
+    }
+
+    // function for testing purposes
+    public boolean testCheckForUserInDatabase(String username){
+        return checkForUserInDatabase(username);
     }
 
     private void getGradeAppDAO(){
