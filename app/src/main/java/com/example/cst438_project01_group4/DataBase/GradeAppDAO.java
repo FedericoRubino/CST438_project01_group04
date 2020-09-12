@@ -32,6 +32,8 @@ public interface GradeAppDAO {
     @Query("Select * FROM " + AppDatabase.ASSIGNMENT_TABLE + " WHERE courseID = :assignmentId")
     public Assignment getAssignmentById(int assignmentId);
 
+    //Course Queries
+
     @Insert
     public void insert(Course course);
 
@@ -50,6 +52,7 @@ public interface GradeAppDAO {
     @Query("Select * FROM " + AppDatabase.COURSE_TABLE + " WHERE courseID = :courseId")
     public Course getCourseById(int courseId);
 
+    //Enrollment Queries
 
     @Insert
     public void insert(Enrollment enrollment);
@@ -62,6 +65,8 @@ public interface GradeAppDAO {
 
     @Query("SELECT * FROM " + AppDatabase.ENROLLMENT_TABLE)
     public List<Enrollment> getAllEnrollments();
+
+    //GradeCategory Queries
 
     @Insert
     public void insert(GradeCategory gradeCategory);
@@ -84,6 +89,8 @@ public interface GradeAppDAO {
     @Query("Select * from " + AppDatabase.GRADE_CATEGORY_TABLE + " WHERE title = :categoryName")
     public GradeCategory getGradeCategoryByName(String categoryName);
 
+    //Grade Queries
+
     @Insert
     public void insert(Grade grade);
 
@@ -95,6 +102,8 @@ public interface GradeAppDAO {
 
     @Query("SELECT * FROM " + AppDatabase.GRADE_TABLE)
     public List<Grade> getAllGrades();
+
+    //User Queries
 
     @Insert
     public void insert(User user);
@@ -108,16 +117,19 @@ public interface GradeAppDAO {
     @Query("SELECT * FROM " + AppDatabase.USER_TABLE + " WHERE username = :usernameField")
     User getUserByUsername(String usernameField);
 
+    @Query("SELECT * FROM " + AppDatabase.USER_TABLE + " WHERE userID = :userID")
+    User getUserByUserID(int userID);
+
     @Query("SELECT * FROM " + AppDatabase.USER_TABLE)
     public List<User> getAllUsers();
 
 
     // get a list of assignments based on userID, courseID
-    @Query("Select * from " + AppDatabase.ASSIGNMENT_TABLE + " WHERE courseID = :courseID and userID = :userID")
-    public List<Assignment> getAssignmentsByCourseID(int courseID, int userID);
+    @Query("Select * from " + AppDatabase.ASSIGNMENT_TABLE + " WHERE courseID = :courseID")
+    public List<Assignment> getAssignmentsByCourseID(int courseID);
 
     // get a grade based on assignmentID
-    @Query("Select * from " + AppDatabase.GRADE_TABLE + " WHERE courseID = :assignmentID")
+    @Query("Select * from " + AppDatabase.GRADE_TABLE + " WHERE assignmentID = :assignmentID")
     public Grade getGradeByAssignmentID(int assignmentID);
 
 }

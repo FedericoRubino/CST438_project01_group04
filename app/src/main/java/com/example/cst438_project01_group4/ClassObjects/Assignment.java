@@ -20,11 +20,10 @@ public class Assignment {
     private int categoryID;
     private int courseID;
 
-    // added this after
-    private int gradeID;
-    private int userID;
+//    private int gradeID;
+//    private int userID;
 
-    public Assignment(String details, int maxScore, double earnedScore, Date assignedDate, Date dueDate, int categoryID, int courseID, int userID) {
+    public Assignment(String details, int maxScore, double earnedScore, Date assignedDate, Date dueDate, int categoryID, int courseID) {
         this.details = details;
         this.maxScore = maxScore;
         this.earnedScore = earnedScore;
@@ -32,24 +31,23 @@ public class Assignment {
         this.dueDate = dueDate;
         this.categoryID = categoryID;
         this.courseID = courseID;
-        this.userID = userID;
     }
 
-    public int getUserID() {
-        return userID;
-    }
-
-    public void setUserID(int userID) {
-        this.userID = userID;
-    }
-
-    public int getGradeID() {
-        return gradeID;
-    }
-
-    public void setGradeID(int gradeID) {
-        this.gradeID = gradeID;
-    }
+//    public int getUserID() {
+//        return userID;
+//    }
+//
+//    public void setUserID(int userID) {
+//        this.userID = userID;
+//    }
+//
+//    public int getGradeID() {
+//        return gradeID;
+//    }
+//
+//    public void setGradeID(int gradeID) {
+//        this.gradeID = gradeID;
+//    }
 
     public int getAssignmentID() {
         return assignmentID;

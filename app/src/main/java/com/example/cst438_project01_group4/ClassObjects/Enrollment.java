@@ -3,10 +3,10 @@ package com.example.cst438_project01_group4.ClassObjects;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
-import java.util.Date;
-
 import com.example.cst438_project01_group4.DataBase.AppDatabase;
 
+import java.util.Date;
+//Not using this class currently
 @Entity(tableName = AppDatabase.ENROLLMENT_TABLE)
 public class Enrollment {
     @PrimaryKey(autoGenerate = true)
