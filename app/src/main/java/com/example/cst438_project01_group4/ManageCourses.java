@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.room.Room;
 
 import com.example.cst438_project01_group4.ClassObjects.Course;
+import com.example.cst438_project01_group4.ClassObjects.User;
 import com.example.cst438_project01_group4.DataBase.AppDatabase;
 import com.example.cst438_project01_group4.DataBase.GradeAppDAO;
 import com.example.cst438_project01_group4.RecyclerView.GradeAppAdapter;
@@ -29,6 +30,8 @@ public class ManageCourses extends AppCompatActivity implements ItemClickListene
     private GradeAppDAO gradeAppDAO;
     private static List<Course> courses;
     private Course clickedCourse;
+
+    User account = gradeAppDAO.getUserByUsername(getIntent().getStringExtra("user"));
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

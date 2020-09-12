@@ -43,6 +43,7 @@ public class EditCourseActivity extends AppCompatActivity {
         mDescription = findViewById(R.id.CourseDescriptionEditText);
 
         getGradeAppDAO();
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         editCourse = gradeAppDAO.getCourseById(courseId);
         if(editCourse != null){
             courseName = editCourse.getTitle();

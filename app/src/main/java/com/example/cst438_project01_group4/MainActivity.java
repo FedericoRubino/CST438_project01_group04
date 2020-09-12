@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+import android.widget.Toolbar;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.room.Room;
@@ -82,6 +83,7 @@ public class MainActivity extends AppCompatActivity {
                     }
                     if(pass){
                         Intent intent = new Intent(MainActivity.this, ManageCourses.class);
+                        intent.putExtra("user",account.getUsername());
                         startActivity(intent);
                     }
                 }
