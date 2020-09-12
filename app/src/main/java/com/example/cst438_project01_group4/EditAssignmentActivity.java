@@ -223,5 +223,4 @@ public class EditAssignmentActivity extends AppCompatActivity implements Adapter
                 .build()
                 .getGradeAppDao();
     }
-
 }
