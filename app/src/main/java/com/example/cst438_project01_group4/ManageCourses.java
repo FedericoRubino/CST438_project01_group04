@@ -30,8 +30,7 @@ public class ManageCourses extends AppCompatActivity implements ItemClickListene
     private GradeAppDAO gradeAppDAO;
     private static List<Course> courses;
     private Course clickedCourse;
-
-    User account = gradeAppDAO.getUserByUsername(getIntent().getStringExtra("user"));
+    private User loggedInUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,24 +39,15 @@ public class ManageCourses extends AppCompatActivity implements ItemClickListene
 
         getGradeAppDAO();
         courses = gradeAppDAO.getAllCourses();
+        loggedInUser = gradeAppDAO.getUserByUserID(getIntent().getIntExtra("user", -1));
 
-        // wiring up the recycler view
         recyclerView = findViewById(R.id.rvCourses);
-
-        // use this setting to improve performance if you know that changes
-        // in content do not change the layout size of the RecyclerView
         recyclerView.setHasFixedSize(true);
-
-        // use a linear layout manager
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
-
-        // specify an adapter (see also next example)
         mAdapter = new GradeAppAdapter(courses);
         recyclerView.setAdapter(mAdapter);
         mAdapter.setClickListener(ManageCourses.this);
-
-
     }
 
     @Override
@@ -89,7 +79,9 @@ public class ManageCourses extends AppCompatActivity implements ItemClickListene
         alert.show();
     }
 
-    // returns the dao
+    /**
+     * DAO Factory
+     */
     private void getGradeAppDAO(){
         gradeAppDAO = Room.databaseBuilder(this, AppDatabase.class, AppDatabase.DB_NAME)
                 .allowMainThreadQueries()
@@ -97,14 +89,16 @@ public class ManageCourses extends AppCompatActivity implements ItemClickListene
                 .getGradeAppDao();
     }
 
-
-
-    // Intent factory
-    public static Intent getIntent(Context context, String value){
+    /**
+     * Intent Factory
+     * @param context
+     * @param value
+     * @return
+     */
+    public static Intent getIntent(Context context, int value){
         Intent intent = new Intent(context, ManageCourses.class);
         intent.putExtra("EXTRA",value);
 
         return intent;
     }
-
 }

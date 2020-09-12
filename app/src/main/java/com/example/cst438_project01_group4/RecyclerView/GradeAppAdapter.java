@@ -64,7 +64,7 @@ public class GradeAppAdapter extends RecyclerView.Adapter<GradeAppAdapter.ViewHo
         }
     }
 
-    // Pass in the contact array into the constructor
+    // Pass in the course array into the constructor
     public GradeAppAdapter(List<Course> courseList) {
         mCoursesList = courseList;
     }

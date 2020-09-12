@@ -6,7 +6,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-import android.widget.Toolbar;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.room.Room;
@@ -49,17 +48,13 @@ public class MainActivity extends AppCompatActivity {
             mGradeAppDAO.insert(g);
             mGradeAppDAO.insert(new GradeCategory("Homework2", 0.5, a.getCourseID()));
             mGradeAppDAO.insert(new GradeCategory("Homework3", 0.6, a.getCourseID()));
-            Assignment as = new Assignment("SuperDifficult", 100, 0.5, new Date(01,01,2018), new Date(01,01,2018), g.getCategoryID(), g.getCourseID(), one.getUserID());
+            Assignment as = new Assignment("SuperDifficult", 100, 0.5, new Date(01,01,2018), new Date(01,01,2018), g.getCategoryID(), g.getCourseID());
             mGradeAppDAO.insert(as);
-            Grade grade = new Grade(0.5, as.getAssignmentID(), a.getCourseID(), new Date(01,01,2018));
-            as.setGradeID(grade.getGradeID());
+            Grade grade = new Grade(0.5, as.getAssignmentID(), new Date(01,01,2018), a.getUserID());
             mGradeAppDAO.insert(new Course(111,"Dr.C", "cst338","The best there ever was", new Date(01,01,2018),new Date(01,01,2018)));
             mGradeAppDAO.insert(new Course(111,"Dr.C", "cst438","The best there ever was", new Date(01,01,2018),new Date(01,01,2018)));
 //            mGradeAppDAO.insert(new Course("Dr.C", "cst438","The best there ever was", new Date(01/01/2018),null));
 //            mGradeAppDAO.insert(new Course("Dr.C", "cst201","The best there ever was", new Date(01/01/2018),null));
-            Toast.makeText(this, "" + mGradeAppDAO.getAllGradeCategoriesByCourseID(as.getCourseID()).size(), Toast.LENGTH_LONG).show();
-            Intent intent = EditAssignmentActivity.getIntent(getApplicationContext(), as.getAssignmentID());
-            startActivity(intent);
         }
 
         Username = (EditText)findViewById(R.id.etUsername);
@@ -82,8 +77,7 @@ public class MainActivity extends AppCompatActivity {
                         pass = false;
                     }
                     if(pass){
-                        Intent intent = new Intent(MainActivity.this, ManageCourses.class);
-                        intent.putExtra("user",account.getUsername());
+                        Intent intent = ManageCourses.getIntent(getApplicationContext(), account.getUserID());
                         startActivity(intent);
                     }
                 }
@@ -100,8 +94,11 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    //function that checks if the given username is in the database
-    private boolean checkForUserInDatabase(String username){
+    /**
+     * function that checks if the given username is in the database
+     * @param username
+     */
+    public boolean checkForUserInDatabase(String username){
         User mUser;
         mUser = mGradeAppDAO.getUserByUsername(username);
         if(mUser == null){
@@ -114,20 +111,13 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    // function for testing purposes
-    public boolean testCheckForUserInDatabase(String username){
-        return checkForUserInDatabase(username);
-    }
-
+    /**
+     * DAO Factory
+     */
     private void getGradeAppDAO(){
         mGradeAppDAO = Room.databaseBuilder(this, AppDatabase.class, AppDatabase.DB_NAME)
                 .allowMainThreadQueries()
                 .build()
                 .getGradeAppDao();
-    }
-
-    public GradeAppDAO returnDatabase(){
-        getGradeAppDAO();
-        return mGradeAppDAO;
     }
 }

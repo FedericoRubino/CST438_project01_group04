@@ -14,14 +14,23 @@ public class Grade {
 
     private double score;
     private int assignmentID;
-    private int courseID;
+//    private int courseID;
+    private int userID;
     private Date dateEarned;
 
-    public Grade(double score, int assignmentID, int courseID, Date dateEarned) {
+    public Grade(double score, int assignmentID, Date dateEarned, int userID) {
         this.score = score;
         this.assignmentID = assignmentID;
-        this.courseID = courseID;
         this.dateEarned = dateEarned;
+        this.userID = userID;
+    }
+
+    public int getUserID() {
+        return userID;
+    }
+
+    public void setUserID(int userID) {
+        this.userID = userID;
     }
 
     public int getGradeID() {
@@ -46,14 +55,6 @@ public class Grade {
 
     public void setAssignmentID(int assignmentID) {
         this.assignmentID = assignmentID;
-    }
-
-    public int getCourseID() {
-        return courseID;
-    }
-
-    public void setCourseID(int courseID) {
-        this.courseID = courseID;
     }
 
     public Date getDateEarned() {
