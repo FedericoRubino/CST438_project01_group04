@@ -17,6 +17,9 @@ import java.util.List;
 
 @Dao
 public interface GradeAppDAO {
+
+    //Assignment Queries
+
     @Insert
     public void insert(Assignment assignment);
 
@@ -29,7 +32,7 @@ public interface GradeAppDAO {
     @Query("SELECT * FROM " + AppDatabase.ASSIGNMENT_TABLE)
     public List<Assignment> getAllAssignments();
 
-    @Query("Select * FROM " + AppDatabase.ASSIGNMENT_TABLE + " WHERE courseID = :assignmentId")
+    @Query("Select * FROM " + AppDatabase.ASSIGNMENT_TABLE + " WHERE assignmentID = :assignmentId")
     public Assignment getAssignmentById(int assignmentId);
 
     //Course Queries
@@ -81,10 +84,10 @@ public interface GradeAppDAO {
     public GradeCategory getGradeCategoryById(int categoryId);
 
     @Query("SELECT * FROM " + AppDatabase.GRADE_CATEGORY_TABLE)
-    public List<GradeCategory> getAllGradeCategorys();
+    public List<GradeCategory> getAllGradeCategories();
 
-    @Query("Select * from " + AppDatabase.GRADE_CATEGORY_TABLE + " WHERE courseID = :courseID")
-    public List<GradeCategory> getAllGradeCategoriesByCourseID(int courseID);
+    @Query("Select * from " + AppDatabase.GRADE_CATEGORY_TABLE + " WHERE assignmentID = :assignmentID")
+    public List<GradeCategory> getAllGradeCategoriesByAssignmentID(int assignmentID);
 
     @Query("Select * from " + AppDatabase.GRADE_CATEGORY_TABLE + " WHERE title = :categoryName")
     public GradeCategory getGradeCategoryByName(String categoryName);
@@ -114,22 +117,34 @@ public interface GradeAppDAO {
     @Update
     public void update(User user);
 
-    @Query("SELECT * FROM " + AppDatabase.USER_TABLE + " WHERE username = :usernameField")
-    User getUserByUsername(String usernameField);
+    @Query("SELECT * FROM " + AppDatabase.USER_TABLE + " WHERE username= :username")
+    User getUserByUsername(String username);
 
     @Query("SELECT * FROM " + AppDatabase.USER_TABLE + " WHERE userID = :userID")
     User getUserByUserID(int userID);
 
     @Query("SELECT * FROM " + AppDatabase.USER_TABLE)
-    public List<User> getAllUsers();
+    List<User> getAllUsers();
 
 
-    // get a list of assignments based on userID, courseID
+    // get a list of assignments based on courseID
     @Query("Select * from " + AppDatabase.ASSIGNMENT_TABLE + " WHERE courseID = :courseID")
-    public List<Assignment> getAssignmentsByCourseID(int courseID);
+    List<Assignment> getAssignmentsByCourseID(int courseID);
+
+    // get a list of assignments based on courseID
+    @Query("Select * from " + AppDatabase.GRADE_CATEGORY_TABLE + " WHERE assignmentID = :assignmentID")
+    GradeCategory getGradeCategoryByAssignmentID(int assignmentID);
+
+    // get a list of courses based on userID
+    @Query("Select * from " + AppDatabase.COURSE_TABLE + " WHERE userID = :userID")
+    List<Course> getAllCoursesByUserID(int userID);
+
+    // get a list of courses based on userID
+    @Query("Select * from " + AppDatabase.COURSE_TABLE + " WHERE userID = :userID")
+    Course getCourseByUserID(int userID);
 
     // get a grade based on assignmentID
     @Query("Select * from " + AppDatabase.GRADE_TABLE + " WHERE assignmentID = :assignmentID")
-    public Grade getGradeByAssignmentID(int assignmentID);
+    Grade getGradeByAssignmentID(int assignmentID);
 
 }

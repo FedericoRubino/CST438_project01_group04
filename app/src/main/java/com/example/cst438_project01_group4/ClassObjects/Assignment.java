@@ -101,8 +101,8 @@ public class Assignment {
         return categoryID;
     }
 
-    public void setCategoryID(int categroyID) {
-        this.categoryID = categroyID;
+    public void setCategoryID(int categoryID) {
+        this.categoryID = categoryID;
     }
 
     public int getCourseID() {
