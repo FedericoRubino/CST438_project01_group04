@@ -43,6 +43,7 @@ public class EditAssignmentActivity extends AppCompatActivity implements Adapter
     private List<String> categoriesNames;
     Date assignedDate;
     Date dueDate;
+    Spinner spinner;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,16 +65,17 @@ public class EditAssignmentActivity extends AppCompatActivity implements Adapter
             earnedScore = editAssignment.getEarnedScore();
             assignedDate = editAssignment.getAssignedDate();
             dueDate = editAssignment.getDueDate();
+            categoryID = editAssignment.getCategoryID();
 
             mDetails.setHint("Details: " + details);
             mMaxScore.setHint("Max Score: " + maxScore);
             mEarnedScore.setHint("Earned Score: " + earnedScore);
         }
 
-        categories = gradeAppDAO.getAllGradeCategoriesByCourseID(courseId);
+        categories = gradeAppDAO.getAllGradeCategoriesByAssignmentID(intent.getIntExtra("EXTRA", -1));
         categoriesNames = gradeCategories(categories);
 
-        Spinner spinner = (Spinner) findViewById(R.id.categories_spinner);
+        spinner = (Spinner) findViewById(R.id.categories_spinner);
         spinner.setOnItemSelectedListener(this);
         // Create an ArrayAdapter using the string array and a default spinner layout
         ArrayAdapter<String> adapter = new ArrayAdapter(this,
@@ -111,7 +113,7 @@ public class EditAssignmentActivity extends AppCompatActivity implements Adapter
             public void onClick(DialogInterface dialog, int which) {
                 updateAssignment();
                 gradeAppDAO.update(editAssignment);
-                Intent intent = ManageCourses.getIntent(getApplicationContext(), 0);
+                Intent intent = ManageAssignments.getIntent(getApplicationContext(), gradeAppDAO.getCourseById(editAssignment.getCourseID()).getUserID());
                 startActivity(intent);
             }
 
@@ -160,7 +162,7 @@ public class EditAssignmentActivity extends AppCompatActivity implements Adapter
             assignmentEarnedScore = earnedScore;
         }
 
-        return new Assignment(assignmentDetails, assignmentMaxScore, assignmentEarnedScore, assignedDate, dueDate,  gradeAppDAO.getGradeCategoryByName(category).getCategoryID(), editAssignment.getCourseID());
+        return new Assignment(assignmentDetails, assignmentMaxScore, assignmentEarnedScore, assignedDate, dueDate,  getGradeCategory(), editAssignment.getCourseID());
     }
 
     /**
@@ -181,6 +183,11 @@ public class EditAssignmentActivity extends AppCompatActivity implements Adapter
      */
     public void onNothingSelected(AdapterView<?> parent) {
         category = gradeAppDAO.getGradeCategoryById(categoryID).toString();
+    }
+
+    public int getGradeCategory(){
+        editAssignment.setCategoryID(gradeAppDAO.getGradeCategoryByName(category).getCategoryID());
+        return categoryID = gradeAppDAO.getGradeCategoryByName(category).getCategoryID();
     }
 
     /**
