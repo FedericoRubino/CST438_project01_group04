@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 
 import androidx.appcompat.app.AlertDialog;
@@ -36,6 +37,8 @@ public class ManageAssignments extends AppCompatActivity implements ItemClickLis
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_manage_assignments);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
 
         getGradeAppDAO();
         assignments = gradeAppDAO.getAssignmentsByCourseID(getIntent().getIntExtra("EXTRA", -1));
