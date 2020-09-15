@@ -37,6 +37,8 @@ public class ManageCourses extends AppCompatActivity implements ItemClickListene
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_manage_courses);
+//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
 
         getGradeAppDAO();
 
