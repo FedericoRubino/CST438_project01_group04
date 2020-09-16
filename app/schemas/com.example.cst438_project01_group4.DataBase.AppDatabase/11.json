@@ -2,11 +2,11 @@
   "formatVersion": 1,
   "database": {
     "version": 11,
-    "identityHash": "301750566333c083a0af98796d17f941",
+    "identityHash": "9282f19049d88bcf597350250b0c7946",
     "entities": [
       {
         "tableName": "assignment",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`assignmentID` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `details` TEXT, `maxScore` INTEGER NOT NULL, `earnedScore` REAL NOT NULL, `assignedDate` INTEGER, `dueDate` INTEGER, `categoryID` INTEGER NOT NULL, `courseID` INTEGER NOT NULL)",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`assignmentID` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `details` TEXT, `maxScore` INTEGER NOT NULL, `earnedScore` REAL NOT NULL, `categoryID` INTEGER NOT NULL, `courseID` INTEGER NOT NULL, `unweightedGrade` REAL NOT NULL)",
         "fields": [
           {
             "fieldPath": "assignmentID",
@@ -33,18 +33,6 @@
             "notNull": true
           },
           {
-            "fieldPath": "assignedDate",
-            "columnName": "assignedDate",
-            "affinity": "INTEGER",
-            "notNull": false
-          },
-          {
-            "fieldPath": "dueDate",
-            "columnName": "dueDate",
-            "affinity": "INTEGER",
-            "notNull": false
-          },
-          {
             "fieldPath": "categoryID",
             "columnName": "categoryID",
             "affinity": "INTEGER",
@@ -54,6 +42,12 @@
             "fieldPath": "courseID",
             "columnName": "courseID",
             "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "unweightedGrade",
+            "columnName": "unweightedGrade",
+            "affinity": "REAL",
             "notNull": true
           }
         ],
@@ -68,7 +62,7 @@
       },
       {
         "tableName": "course",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`courseID` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `instructor` TEXT, `title` TEXT, `description` TEXT, `startDate` INTEGER, `endDate` INTEGER, `userID` INTEGER NOT NULL)",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`courseID` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `instructor` TEXT, `title` TEXT, `description` TEXT, `userID` INTEGER NOT NULL, `grade` REAL NOT NULL)",
         "fields": [
           {
             "fieldPath": "courseID",
@@ -95,21 +89,15 @@
             "notNull": false
           },
           {
-            "fieldPath": "startDate",
-            "columnName": "startDate",
-            "affinity": "INTEGER",
-            "notNull": false
-          },
-          {
-            "fieldPath": "endDate",
-            "columnName": "endDate",
-            "affinity": "INTEGER",
-            "notNull": false
-          },
-          {
             "fieldPath": "userID",
             "columnName": "userID",
             "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "grade",
+            "columnName": "grade",
+            "affinity": "REAL",
             "notNull": true
           }
         ],
@@ -162,7 +150,7 @@
       },
       {
         "tableName": "grade",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`gradeID` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `score` REAL NOT NULL, `assignmentID` INTEGER NOT NULL, `userID` INTEGER NOT NULL, `dateEarned` INTEGER)",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`gradeID` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `score` REAL NOT NULL, `courseID` INTEGER NOT NULL)",
         "fields": [
           {
             "fieldPath": "gradeID",
@@ -177,22 +165,10 @@
             "notNull": true
           },
           {
-            "fieldPath": "assignmentID",
-            "columnName": "assignmentID",
+            "fieldPath": "courseID",
+            "columnName": "courseID",
             "affinity": "INTEGER",
             "notNull": true
-          },
-          {
-            "fieldPath": "userID",
-            "columnName": "userID",
-            "affinity": "INTEGER",
-            "notNull": true
-          },
-          {
-            "fieldPath": "dateEarned",
-            "columnName": "dateEarned",
-            "affinity": "INTEGER",
-            "notNull": false
           }
         ],
         "primaryKey": {
@@ -206,7 +182,7 @@
       },
       {
         "tableName": "gradeCategory",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`categoryID` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `title` TEXT, `weight` REAL NOT NULL, `assignmentID` INTEGER NOT NULL)",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`categoryID` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `title` TEXT, `weight` REAL NOT NULL, `courseID` INTEGER NOT NULL)",
         "fields": [
           {
             "fieldPath": "categoryID",
@@ -227,8 +203,8 @@
             "notNull": true
           },
           {
-            "fieldPath": "assignmentID",
-            "columnName": "assignmentID",
+            "fieldPath": "courseID",
+            "columnName": "courseID",
             "affinity": "INTEGER",
             "notNull": true
           }
@@ -296,7 +272,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '301750566333c083a0af98796d17f941')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '9282f19049d88bcf597350250b0c7946')"
     ]
   }
 }

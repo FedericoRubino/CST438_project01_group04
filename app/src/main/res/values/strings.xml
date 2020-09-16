@@ -4,4 +4,7 @@
     <string name="enterUpdate">Update</string>
     <string name="CourseDetails">Course Details</string>
     <string name="EditAssignmentPrompt">Assignment Details</string>
+    <string name="logout">LOGOUT</string>
+    <string name="addCourse">ADD COURSE</string>
+    <string name="addAssignment">ADD ASSIGNMENT</string>
 </resources>

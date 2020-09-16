@@ -48,8 +48,8 @@ public class EditCourseActivity extends AppCompatActivity {
             courseName = editCourse.getTitle();
             courseInstructor = editCourse.getInstructor();
             courseDescription = editCourse.getDescription();
-            courseStartTime = editCourse.getStartDate();
-            courseEndTime = editCourse.getEndDate();
+//            courseStartTime = editCourse.getStartDate();
+//            courseEndTime = editCourse.getEndDate();
 
             mTitle.setHint(courseName);
             mInstructor.setHint(courseInstructor);
@@ -121,7 +121,7 @@ public class EditCourseActivity extends AppCompatActivity {
             description = courseDescription;
         }
 
-        return new Course(editCourse.getUserID(), instructor, title, description, courseStartTime, courseEndTime);
+        return new Course(editCourse.getUserID(), instructor, title, description);
     }
 
     /**

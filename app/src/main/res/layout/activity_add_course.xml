@@ -8,91 +8,132 @@
 
     <TextView
         android:id="@+id/tvAddcourse"
-        android:layout_width="240dp"
-        android:layout_height="90dp"
+        android:layout_width="265dp"
+        android:layout_height="40dp"
         android:text="Add Course Information"
         android:textAlignment="center"
-        android:textSize="30sp"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.15" />
+        app:layout_constraintVertical_bias="0.023" />
 
     <EditText
         android:id="@+id/etInstructor"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="253dp"
+        android:layout_height="37dp"
         android:ems="10"
         android:hint="instructor"
         android:inputType="textPersonName"
+        android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvAddcourse"
-        app:layout_constraintVertical_bias="0.1" />
+        app:layout_constraintVertical_bias="0.028" />
 
     <EditText
         android:id="@+id/etTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="253dp"
+        android:layout_height="37dp"
         android:ems="10"
         android:hint="title"
         android:inputType="textPersonName"
+        android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/etInstructor"
-        app:layout_constraintVertical_bias="0.1" />
+        app:layout_constraintVertical_bias="0.024" />
 
     <EditText
         android:id="@+id/etDescription"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="253dp"
+        android:layout_height="37dp"
+        android:layout_marginTop="5dp"
         android:ems="10"
         android:hint="description"
         android:inputType="textPersonName"
+        android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/etTitle"
-        app:layout_constraintVertical_bias="0.1" />
+        app:layout_constraintVertical_bias="0.015" />
 
     <EditText
-        android:id="@+id/etStartdate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:id="@+id/etHomeworkWeight"
+        android:layout_width="253dp"
+        android:layout_height="37dp"
+        android:layout_marginTop="5dp"
         android:ems="10"
-        android:hint="startdate"
-        android:inputType="textPersonName"
+        android:hint="Homework Weight(Percent): ex: 10"
+        android:inputType="numberDecimal"
+        android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/etDescription"
-        app:layout_constraintVertical_bias="0.1" />
+        app:layout_constraintVertical_bias="0.052" />
 
     <EditText
-        android:id="@+id/etEnddate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:id="@+id/etAssignmentWeight"
+        android:layout_width="253dp"
+        android:layout_height="37dp"
         android:ems="10"
-        android:hint="enddate"
-        android:inputType="textPersonName"
+        android:hint="Assignment Weight(Percent)"
+        android:inputType="numberDecimal"
+        android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etStartdate"
+        app:layout_constraintTop_toBottomOf="@+id/etHomeworkWeight"
+        app:layout_constraintVertical_bias="0.1" />
+
+    <EditText
+        android:id="@+id/etQuizWeight"
+        android:layout_width="253dp"
+        android:layout_height="37dp"
+        android:ems="10"
+        android:hint="Quiz Weight(Percent)"
+        android:inputType="numberDecimal"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/etAssignmentWeight"
+        app:layout_constraintVertical_bias="0.1" />
+
+    <EditText
+        android:id="@+id/etTestWeight"
+        android:layout_width="253dp"
+        android:layout_height="37dp"
+        android:ems="10"
+        android:hint="Test Weight(Percent)"
+        android:inputType="numberDecimal"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/etQuizWeight"
         app:layout_constraintVertical_bias="0.1" />
 
     <Button
         android:id="@+id/button"
-        android:layout_width="210sp"
-        android:layout_height="60sp"
+        android:layout_width="208dp"
+        android:layout_height="39dp"
+        android:backgroundTint="#3487C8"
         android:text="Add"
+        android:textColor="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etEnddate"
+        app:layout_constraintTop_toBottomOf="@+id/etTestWeight"
         app:layout_constraintVertical_bias="0.1" />
 </androidx.constraintlayout.widget.ConstraintLayout>

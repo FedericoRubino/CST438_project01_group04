@@ -49,7 +49,10 @@ public interface GradeAppDAO {
     @Query("SELECT * FROM " + AppDatabase.COURSE_TABLE)
     public List<Course> getAllCourses();
 
-    @Query("DELETE FROM " + AppDatabase.COURSE_TABLE)
+    @Query("SELECT * FROM " + AppDatabase.COURSE_TABLE  + " WHERE title = :title")
+    Course getCourseByName(String title);
+
+    @Query("DELETE FROM " + AppDatabase.COURSE_TABLE )
     public void deleteCourseTable();
 
     @Query("Select * FROM " + AppDatabase.COURSE_TABLE + " WHERE courseID = :courseId")
@@ -85,9 +88,6 @@ public interface GradeAppDAO {
 
     @Query("SELECT * FROM " + AppDatabase.GRADE_CATEGORY_TABLE)
     public List<GradeCategory> getAllGradeCategories();
-
-    @Query("Select * from " + AppDatabase.GRADE_CATEGORY_TABLE + " WHERE assignmentID = :assignmentID")
-    public List<GradeCategory> getAllGradeCategoriesByAssignmentID(int assignmentID);
 
     @Query("Select * from " + AppDatabase.GRADE_CATEGORY_TABLE + " WHERE title = :categoryName")
     public GradeCategory getGradeCategoryByName(String categoryName);
@@ -143,9 +143,13 @@ public interface GradeAppDAO {
     @Query("Select * from " + AppDatabase.ASSIGNMENT_TABLE + " WHERE courseID = :courseID")
     List<Assignment> getAssignmentsByCourseID(int courseID);
 
-    // get a list of assignments based on courseID
-    @Query("Select * from " + AppDatabase.GRADE_CATEGORY_TABLE + " WHERE assignmentID = :assignmentID")
-    GradeCategory getGradeCategoryByAssignmentID(int assignmentID);
+    // get a greade category based on assignment
+    @Query("Select * from " + AppDatabase.GRADE_CATEGORY_TABLE + " WHERE courseID = :courseID")
+    GradeCategory getGradeCategoryByCourseID(int courseID);
+
+    // get a grade category based on assignment
+    @Query("Select * from " + AppDatabase.GRADE_CATEGORY_TABLE + " WHERE courseID = :courseID")
+    List<GradeCategory> getAllGradeCategoriesByCourseID(int courseID);
 
     // get a list of courses based on userID
     @Query("Select * from " + AppDatabase.COURSE_TABLE + " WHERE userID = :userID")
@@ -154,9 +158,5 @@ public interface GradeAppDAO {
     // get a list of courses based on userID
     @Query("Select * from " + AppDatabase.COURSE_TABLE + " WHERE userID = :userID")
     Course getCourseByUserID(int userID);
-
-    // get a grade based on assignmentID
-    @Query("Select * from " + AppDatabase.GRADE_TABLE + " WHERE assignmentID = :assignmentID")
-    Grade getGradeByAssignmentID(int assignmentID);
 
 }

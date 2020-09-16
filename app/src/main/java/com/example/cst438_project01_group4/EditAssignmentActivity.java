@@ -21,7 +21,6 @@ import com.example.cst438_project01_group4.DataBase.AppDatabase;
 import com.example.cst438_project01_group4.DataBase.GradeAppDAO;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 public class EditAssignmentActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
@@ -31,18 +30,13 @@ public class EditAssignmentActivity extends AppCompatActivity implements Adapter
     private EditText mDetails;
     private EditText mMaxScore;
     private EditText mEarnedScore;
-    private EditText mCategoryID;
-    private EditText mCourseID;
     private String details;
     private int maxScore;
     private double earnedScore;
     private int categoryID;
-    private int courseID;
     private String category;
     private List<GradeCategory> categories;
     private List<String> categoriesNames;
-    Date assignedDate;
-    Date dueDate;
     Spinner spinner;
 
     @Override
@@ -65,8 +59,8 @@ public class EditAssignmentActivity extends AppCompatActivity implements Adapter
             details = editAssignment.getDetails();
             maxScore = editAssignment.getMaxScore();
             earnedScore = editAssignment.getEarnedScore();
-            assignedDate = editAssignment.getAssignedDate();
-            dueDate = editAssignment.getDueDate();
+//            assignedDate = editAssignment.getAssignedDate();
+//            dueDate = editAssignment.getDueDate();
             categoryID = editAssignment.getCategoryID();
 
             mDetails.setHint("Details: " + details);
@@ -74,7 +68,7 @@ public class EditAssignmentActivity extends AppCompatActivity implements Adapter
             mEarnedScore.setHint("Earned Score: " + earnedScore);
         }
 
-        categories = gradeAppDAO.getAllGradeCategoriesByAssignmentID(intent.getIntExtra("EXTRA", -1));
+        categories = gradeAppDAO.getAllGradeCategoriesByCourseID(courseId);
         categoriesNames = gradeCategories(categories);
 
         spinner = (Spinner) findViewById(R.id.categories_spinner);
@@ -109,7 +103,7 @@ public class EditAssignmentActivity extends AppCompatActivity implements Adapter
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Please confirm changes");
         Assignment assignment = getNewAssignmentValues();
-        builder.setMessage(assignment.toString() + category);
+        builder.setMessage(assignment.toString() + "Category: " + category);
         builder.setPositiveButton("CONFIRM", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
@@ -164,7 +158,7 @@ public class EditAssignmentActivity extends AppCompatActivity implements Adapter
             assignmentEarnedScore = earnedScore;
         }
 
-        return new Assignment(assignmentDetails, assignmentMaxScore, assignmentEarnedScore, assignedDate, dueDate,  getGradeCategory(), editAssignment.getCourseID());
+        return new Assignment(assignmentDetails, assignmentMaxScore, assignmentEarnedScore, getGradeCategory(), editAssignment.getCourseID());
     }
 
     /**
@@ -208,6 +202,7 @@ public class EditAssignmentActivity extends AppCompatActivity implements Adapter
         if(!mEarnedScore.getText().toString().isEmpty()){
             editAssignment.setEarnedScore(Double.parseDouble(mEarnedScore.getText().toString()));
         }
+        editAssignment.setUnweightedGrade(Math.round((editAssignment.getEarnedScore()/editAssignment.getMaxScore()) * 100));
     }
 
     /**

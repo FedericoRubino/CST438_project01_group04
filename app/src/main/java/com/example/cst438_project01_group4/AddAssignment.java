@@ -13,32 +13,23 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.room.Room;
 
 import com.example.cst438_project01_group4.ClassObjects.Course;
-import com.example.cst438_project01_group4.ClassObjects.GradeCategory;
 import com.example.cst438_project01_group4.DataBase.AppDatabase;
 import com.example.cst438_project01_group4.DataBase.GradeAppDAO;
 
-public class AddCourseActivity extends AppCompatActivity {
+public class AddAssignment extends AppCompatActivity {
 
     private EditText instructorEditText;
     private EditText titleEditText;
     private EditText descriptionEditText;
-    private EditText homeworkEditText;
-    private EditText assignmentEditText;
-    private EditText quizEditText;
-    private EditText testEditText;
     private Button submitBtn;
     private Course course;
-    private double homework;
-    private double assignment;
-    private double test;
-    private double quiz;
 
     GradeAppDAO mGradeAppDAO;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_course);
+        setContentView(R.layout.activity_add_assignment);
 
         getDatabase();
         wireup();
@@ -48,11 +39,6 @@ public class AddCourseActivity extends AppCompatActivity {
         instructorEditText = findViewById(R.id.etInstructor);
         titleEditText = findViewById(R.id.etTitle);
         descriptionEditText = findViewById(R.id.etDescription);
-        homeworkEditText = findViewById(R.id.etHomeworkWeight);
-        assignmentEditText = findViewById(R.id.etAssignmentWeight);
-        quizEditText = findViewById(R.id.etQuizWeight);
-        testEditText = findViewById(R.id.etTestWeight);
-
         submitBtn = findViewById(R.id.button);
         submitBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -67,8 +53,6 @@ public class AddCourseActivity extends AppCompatActivity {
 
 
                 course = new Course(mGradeAppDAO.getLoggedInUser().getUserID(), instructor, title, description);
-
-
 
                 if(mGradeAppDAO.getCourseByName(title) != null){
                     badCourse(v);
@@ -105,25 +89,13 @@ public class AddCourseActivity extends AppCompatActivity {
     }
 
     public void goodCourse(View view){
-        double assignmentWeight = Double.parseDouble(assignmentEditText.getText().toString());
-        double homeworkWeight = Double.parseDouble(homeworkEditText.getText().toString());
-        double quizWeight = Double.parseDouble(quizEditText.getText().toString());
-        double testWeight = Double.parseDouble(testEditText.getText().toString());
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Confirm Course");
-        builder.setMessage(course.toString() + "\nHomework Weight: " + homeworkWeight + "%" + "\nAssignment Weight: " + assignmentWeight + "%" + "\nQuiz Weight: " + quizWeight + "%" + "\nTest Weight: " + testWeight + "%");
+        builder.setMessage(course.toString());
         builder.setPositiveButton("CONFIRM", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 mGradeAppDAO.insert(course);
-                GradeCategory assignmentCategory = new GradeCategory("Assignment", Double.parseDouble(homeworkEditText.getText().toString())/100, mGradeAppDAO.getCourseByName(course.getTitle()).getCourseID());
-                GradeCategory homeworkCategory = new GradeCategory("Homework", Double.parseDouble(homeworkEditText.getText().toString())/100, mGradeAppDAO.getCourseByName(course.getTitle()).getCourseID());
-                GradeCategory quizCategory = new GradeCategory("Quiz", Double.parseDouble(homeworkEditText.getText().toString())/100, mGradeAppDAO.getCourseByName(course.getTitle()).getCourseID());
-                GradeCategory testCategory = new GradeCategory("Test", Double.parseDouble(homeworkEditText.getText().toString())/100, mGradeAppDAO.getCourseByName(course.getTitle()).getCourseID());
-                mGradeAppDAO.insert(assignmentCategory);
-                mGradeAppDAO.insert(homeworkCategory);
-                mGradeAppDAO.insert(quizCategory);
-                mGradeAppDAO.insert(testCategory);
                 Intent intent = ManageCourses.getIntent(getApplicationContext(), mGradeAppDAO.getLoggedInUser().getUserID());
                 startActivity(intent);
             }
