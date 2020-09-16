@@ -50,6 +50,8 @@ public class EditAssignmentActivity extends AppCompatActivity implements Adapter
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_assignment);
         getGradeAppDAO();
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
 
         Intent intent = getIntent();
         int assignmentId = intent.getIntExtra("EXTRA", -1);

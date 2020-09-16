@@ -53,6 +53,8 @@ public class Login extends AppCompatActivity {
                         pass = false;
                     }
                     if (pass) {
+                        logInUser(account.getUsername());
+                        //no reason to pass userId anymore
                         Intent intent = ManageCourses.getIntent(getApplicationContext(), account.getUserID());
                         //Toast.makeText(Login.this, "UserID " + account.getUserID() + "User courses" + mGradeAppDAO.getAllCoursesByUserID(account.getUserID()).size(), Toast.LENGTH_LONG).show();
                         startActivity(intent);
@@ -70,6 +72,14 @@ public class Login extends AppCompatActivity {
         });
     }
 
+    /**
+     * logs out all previous users and logs in the current user
+     * @param username
+     */
+    private void logInUser(String username) {
+        mGradeAppDAO.logOutAllUsers();
+        mGradeAppDAO.setLoggedInUser(username);
+    }
 
 
     /**

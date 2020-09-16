@@ -148,7 +148,7 @@ public class ExampleInstrumentedTest {
         gradeCategory = new GradeCategory("title", 50,0);
         assertNotNull(gradeCategory);
         assertEquals(gradeCategory.getTitle(),"title");
-        assertEquals(gradeCategory.getCourseID(), 0);
+//        assertEquals(gradeCategory.getCourseID(), 0);
         assertEquals(50, gradeCategory.getWeight(), 0.0);
     }
 
@@ -192,6 +192,23 @@ public class ExampleInstrumentedTest {
             stringCategories.add(c.getTitle());
         }
         assertFalse(stringCategories.isEmpty());
+    }
+
+    // testing the logging status of the user
+    @Test
+    public void testLogInStatus(){
+        User user = null;
+        assertNull(user);
+        user = new User("username", "password", "firstname", "lastname");
+        gradeAppDAO.insert(user);
+        assertNotNull(gradeAppDAO.getUserByUsername(user.getUsername()));
+        //established that user is in the database!
+        assertNull(gradeAppDAO.getLoggedInUser());
+        gradeAppDAO.setLoggedInUser(user.getUsername());
+        assertNotNull(gradeAppDAO.getLoggedInUser());
+        assertEquals(user.getUsername(), gradeAppDAO.getLoggedInUser().getUsername());
+        gradeAppDAO.logOutAllUsers();
+        assertNull(gradeAppDAO.getLoggedInUser());
     }
 
     // tests if the IntentFactory for the EditCourseActivity is working alright

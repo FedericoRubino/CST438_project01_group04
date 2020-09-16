@@ -37,10 +37,12 @@ public class ManageCourses extends AppCompatActivity implements ItemClickListene
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_manage_courses);
+//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
 
         getGradeAppDAO();
-
-        loggedInUser = gradeAppDAO.getUserByUserID(getIntent().getIntExtra("EXTRA", -1));
+        loggedInUser = gradeAppDAO.getLoggedInUser();
+//        loggedInUser = gradeAppDAO.getUserByUserID(getIntent().getIntExtra("EXTRA", -1));
 //        Toast.makeText(ManageCourses.this, "User Assignments" + gradeAppDAO.getAllCoursesByUserID(loggedInUser.getUserID()).size() +  "\nUserID " + loggedInUser.getUserID(), Toast.LENGTH_LONG).show();
         courses = gradeAppDAO.getAllCoursesByUserID(loggedInUser.getUserID());
 
@@ -117,5 +119,14 @@ public class ManageCourses extends AppCompatActivity implements ItemClickListene
         intent.putExtra("EXTRA",value);
 
         return intent;
+    }
+
+    /**
+     * Used to logout all users and return to the login page
+     * @param view
+     */
+    public void logout(View view){
+        gradeAppDAO.logOutAllUsers();
+        finish();
     }
 }
