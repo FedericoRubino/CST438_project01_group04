@@ -21,39 +21,35 @@ public class RegisterActivity extends AppCompatActivity {
     private EditText Newpassword;
     private EditText Firstname;
     private EditText Lastname;
-    private Button Sign = findViewById(R.id.btnSign);
+    private Button Sign;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         getGradeAppDAO();
         Newuser = findViewById(R.id.etNewuser);
         Newpassword = findViewById(R.id.etNewpassword);
         Firstname = findViewById(R.id.etFirstname);
         Lastname = findViewById(R.id.etLastname);
+        Sign = findViewById(R.id.btnSign);
 
         String username = Newuser.getText().toString();
         String password = Newpassword.getText().toString();
         String firstname = Firstname.getText().toString();
         String lastname = Lastname.getText().toString();
 
-        Sign.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(mGradeAppDAO.getAllUsers().isEmpty() || mGradeAppDAO.getUserByUsername(username) == null){
-                    User newuser = new User(username, password, firstname, lastname);
-                    mGradeAppDAO.insert(newuser);
+        Sign.setOnClickListener(v -> {
+            if(mGradeAppDAO.getAllUsers().isEmpty() || mGradeAppDAO.getUserByUsername(username) == null){
+                User newuser = new User(username, password, firstname, lastname);
+                mGradeAppDAO.insert(newuser);
 
-                    Intent intent = new Intent(RegisterActivity.this, ManageCourses.class);
-                    intent.putExtra("user", username);
-                    startActivity(intent);
-                }else{
-                    Toast.makeText(getApplicationContext(), "Username already exists, please try again!", Toast.LENGTH_LONG).show();
-                    Newuser.setError("Incorrect username!");
-                }
+                Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
+                startActivity(intent);
+            }else{
+                Toast.makeText(getApplicationContext(), "Username already exists, please try again!", Toast.LENGTH_LONG).show();
+                Newuser.setError("Incorrect username!");
             }
         });
 

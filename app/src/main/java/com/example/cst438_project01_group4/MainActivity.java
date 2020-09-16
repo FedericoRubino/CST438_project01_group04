@@ -62,10 +62,10 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);
         }
 
-        Username = (EditText)findViewById(R.id.etUsername);
-        Password = (EditText)findViewById(R.id.etPassword);
-        Login = (Button)findViewById(R.id.btnLogin);
-        Register = (Button)findViewById(R.id.btnRegister);
+        Username = findViewById(R.id.etUsername);
+        Password = findViewById(R.id.etPassword);
+        Login = findViewById(R.id.btnLogin);
+        Register = findViewById(R.id.btnRegister);
 
         Login.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -105,7 +105,7 @@ public class MainActivity extends AppCompatActivity {
         User mUser;
         mUser = mGradeAppDAO.getUserByUsername(username);
         if(mUser == null){
-            Toast.makeText(this, "no user " + "username" + " found, you need to register an account", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "no user " + username + " found, you need to register an account", Toast.LENGTH_LONG).show();
             return false;
         }
         else {
