@@ -33,6 +33,12 @@ public class Assignment {
         this.courseID = courseID;
     }
 
+    public double calcUnweightedGrade(){
+        return earnedScore/maxScore;
+    }
+
+
+
 //    public int getUserID() {
 //        return userID;
 //    }
@@ -115,6 +121,6 @@ public class Assignment {
 
     @Override
     public String toString() {
-        return details + "\n" + maxScore + "\n" + earnedScore + "\n";
+        return details + "\n" + maxScore + "\n" + earnedScore + "\n" + calcUnweightedGrade() + "\n";
     }
 }
