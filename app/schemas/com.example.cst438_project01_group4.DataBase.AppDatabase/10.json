@@ -1,8 +1,8 @@
 {
   "formatVersion": 1,
   "database": {
-    "version": 8,
-    "identityHash": "45678e14614bb776805557e7f6f73a68",
+    "version": 10,
+    "identityHash": "610664452f17f59e45f92b5cfe64068e",
     "entities": [
       {
         "tableName": "assignment",
@@ -206,7 +206,7 @@
       },
       {
         "tableName": "gradeCategory",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`categoryID` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `title` TEXT, `weight` REAL NOT NULL, `courseID` INTEGER NOT NULL)",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`categoryID` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `title` TEXT, `weight` REAL NOT NULL, `assignmentID` INTEGER NOT NULL)",
         "fields": [
           {
             "fieldPath": "categoryID",
@@ -227,8 +227,8 @@
             "notNull": true
           },
           {
-            "fieldPath": "courseID",
-            "columnName": "courseID",
+            "fieldPath": "assignmentID",
+            "columnName": "assignmentID",
             "affinity": "INTEGER",
             "notNull": true
           }
@@ -290,7 +290,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '45678e14614bb776805557e7f6f73a68')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '610664452f17f59e45f92b5cfe64068e')"
     ]
   }
 }

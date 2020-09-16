@@ -43,12 +43,15 @@ public class EditAssignmentActivity extends AppCompatActivity implements Adapter
     private List<String> categoriesNames;
     Date assignedDate;
     Date dueDate;
+    Spinner spinner;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_assignment);
         getGradeAppDAO();
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
 
         Intent intent = getIntent();
         int assignmentId = intent.getIntExtra("EXTRA", -1);
@@ -64,16 +67,17 @@ public class EditAssignmentActivity extends AppCompatActivity implements Adapter
             earnedScore = editAssignment.getEarnedScore();
             assignedDate = editAssignment.getAssignedDate();
             dueDate = editAssignment.getDueDate();
+            categoryID = editAssignment.getCategoryID();
 
             mDetails.setHint("Details: " + details);
             mMaxScore.setHint("Max Score: " + maxScore);
             mEarnedScore.setHint("Earned Score: " + earnedScore);
         }
 
-        categories = gradeAppDAO.getAllGradeCategoriesByCourseID(courseId);
+        categories = gradeAppDAO.getAllGradeCategoriesByAssignmentID(intent.getIntExtra("EXTRA", -1));
         categoriesNames = gradeCategories(categories);
 
-        Spinner spinner = (Spinner) findViewById(R.id.categories_spinner);
+        spinner = (Spinner) findViewById(R.id.categories_spinner);
         spinner.setOnItemSelectedListener(this);
         // Create an ArrayAdapter using the string array and a default spinner layout
         ArrayAdapter<String> adapter = new ArrayAdapter(this,
@@ -82,6 +86,10 @@ public class EditAssignmentActivity extends AppCompatActivity implements Adapter
         spinner.setAdapter(adapter);
     }
 
+    /**
+     * @param categories a list of GradeCategories for a Course
+     * @return all of the categories as a string to display
+     */
     private List<String> gradeCategories(List<GradeCategory> categories){
         List<String> stringCategories= new ArrayList<String>();
         for(GradeCategory c: categories){
@@ -91,7 +99,10 @@ public class EditAssignmentActivity extends AppCompatActivity implements Adapter
     }
 
 
-    // confirms input
+    /**
+     * Asks the User to confirm thier changes to the Assignment with an alert
+     * @param view
+     */
     public void confirm(View view){
         //This is where we check input
         //Then we update the database
@@ -104,7 +115,7 @@ public class EditAssignmentActivity extends AppCompatActivity implements Adapter
             public void onClick(DialogInterface dialog, int which) {
                 updateAssignment();
                 gradeAppDAO.update(editAssignment);
-                Intent intent = ManageCourses.getIntent(getApplicationContext(), "");
+                Intent intent = ManageAssignments.getIntent(getApplicationContext(), gradeAppDAO.getCourseById(editAssignment.getCourseID()).getUserID());
                 startActivity(intent);
             }
 
@@ -112,7 +123,7 @@ public class EditAssignmentActivity extends AppCompatActivity implements Adapter
         builder.setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                Intent intent = ManageCourses.getIntent(getApplicationContext(), "");
+                Intent intent = ManageCourses.getIntent(getApplicationContext(), 0);
                 startActivity(intent);
             }
 
@@ -121,6 +132,10 @@ public class EditAssignmentActivity extends AppCompatActivity implements Adapter
         dialog.show();
     }
 
+    /**
+     * Checks user input for input not a blank line
+     * @return
+     */
     private Assignment getNewAssignmentValues(){
         String assignmentDetails;
         int assignmentMaxScore;
@@ -149,18 +164,37 @@ public class EditAssignmentActivity extends AppCompatActivity implements Adapter
             assignmentEarnedScore = earnedScore;
         }
 
-        return new Assignment(assignmentDetails, assignmentMaxScore, assignmentEarnedScore, assignedDate, dueDate,  gradeAppDAO.getGradeCategoryByName(category).getCategoryID(), editAssignment.getCourseID(), editAssignment.getUserID());
+        return new Assignment(assignmentDetails, assignmentMaxScore, assignmentEarnedScore, assignedDate, dueDate,  getGradeCategory(), editAssignment.getCourseID());
     }
 
+    /**
+     * Used for the spinner
+     * @param parent
+     * @param view
+     * @param pos
+     * @param id
+     */
     public void onItemSelected(AdapterView<?> parent, View view,
                                int pos, long id) {
          category =  (String) parent.getItemAtPosition(pos);
     }
 
+    /**
+     * Used for the spinner
+     * @param parent
+     */
     public void onNothingSelected(AdapterView<?> parent) {
         category = gradeAppDAO.getGradeCategoryById(categoryID).toString();
     }
 
+    public int getGradeCategory(){
+        editAssignment.setCategoryID(gradeAppDAO.getGradeCategoryByName(category).getCategoryID());
+        return categoryID = gradeAppDAO.getGradeCategoryByName(category).getCategoryID();
+    }
+
+    /**
+     * If the user confirms the new values
+     */
     private void updateAssignment(){
 
         if(!mDetails.getText().toString().isEmpty()){
@@ -176,7 +210,12 @@ public class EditAssignmentActivity extends AppCompatActivity implements Adapter
         }
     }
 
-    // Intent factory
+    /**
+     * Intent Factory
+     * @param context
+     * @param value
+     * @return
+     */
     public static Intent getIntent(Context context, int value){
         Intent intent = new Intent(context, EditAssignmentActivity.class);
         intent.putExtra("EXTRA",value);
@@ -184,12 +223,13 @@ public class EditAssignmentActivity extends AppCompatActivity implements Adapter
         return intent;
     }
 
-    // returns the dao
+    /**
+     * DAO Factory
+     */
     private void getGradeAppDAO(){
         gradeAppDAO = Room.databaseBuilder(this, AppDatabase.class, AppDatabase.DB_NAME)
                 .allowMainThreadQueries()
                 .build()
                 .getGradeAppDao();
     }
-
 }

@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -30,34 +31,31 @@ public class ManageCourses extends AppCompatActivity implements ItemClickListene
     private GradeAppDAO gradeAppDAO;
     private static List<Course> courses;
     private Course clickedCourse;
-
-    User account = gradeAppDAO.getUserByUsername(getIntent().getStringExtra("user"));
+    private User loggedInUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_manage_courses);
+//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
 
         getGradeAppDAO();
-        courses = gradeAppDAO.getAllCourses();
 
-        // wiring up the recycler view
+        loggedInUser = gradeAppDAO.getUserByUserID(getIntent().getIntExtra("EXTRA", -1));
+//        Toast.makeText(ManageCourses.this, "User Assignments" + gradeAppDAO.getAllCoursesByUserID(loggedInUser.getUserID()).size() +  "\nUserID " + loggedInUser.getUserID(), Toast.LENGTH_LONG).show();
+        courses = gradeAppDAO.getAllCoursesByUserID(loggedInUser.getUserID());
+
         recyclerView = findViewById(R.id.rvCourses);
-
-        // use this setting to improve performance if you know that changes
-        // in content do not change the layout size of the RecyclerView
         recyclerView.setHasFixedSize(true);
-
-        // use a linear layout manager
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
-
-        // specify an adapter (see also next example)
         mAdapter = new GradeAppAdapter(courses);
         recyclerView.setAdapter(mAdapter);
         mAdapter.setClickListener(ManageCourses.this);
-
-
+        if(gradeAppDAO.getAllAssignments().size() == 0) {
+            Toast.makeText(ManageCourses.this, "No Assignments added", Toast.LENGTH_LONG).show();
+        }
     }
 
     @Override
@@ -75,10 +73,21 @@ public class ManageCourses extends AppCompatActivity implements ItemClickListene
             public void onClick(DialogInterface dialog, int which) {
                     Intent intent = EditCourseActivity.getIntent(getApplicationContext(), clickedCourse.getCourseID());
                     startActivity(intent);
-
                 }
         });
-        builder.setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
+        builder.setNeutralButton("ASSIGNMENTS", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                if(gradeAppDAO.getAssignmentsByCourseID(clickedCourse.getCourseID()).size() > 0) {
+                    Intent intent = ManageAssignments.getIntent(getApplicationContext(), clickedCourse.getCourseID());
+                    startActivity(intent);
+                }
+                else
+                    dialog.cancel();
+            }
+
+        });
+        builder.setNegativeButton("DELETE", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.cancel();
@@ -89,7 +98,9 @@ public class ManageCourses extends AppCompatActivity implements ItemClickListene
         alert.show();
     }
 
-    // returns the dao
+    /**
+     * DAO Factory
+     */
     private void getGradeAppDAO(){
         gradeAppDAO = Room.databaseBuilder(this, AppDatabase.class, AppDatabase.DB_NAME)
                 .allowMainThreadQueries()
@@ -97,14 +108,16 @@ public class ManageCourses extends AppCompatActivity implements ItemClickListene
                 .getGradeAppDao();
     }
 
-
-
-    // Intent factory
-    public static Intent getIntent(Context context, String value){
+    /**
+     * Intent Factory
+     * @param context
+     * @param value
+     * @return
+     */
+    public static Intent getIntent(Context context, int value){
         Intent intent = new Intent(context, ManageCourses.class);
         intent.putExtra("EXTRA",value);
 
         return intent;
     }
-
 }

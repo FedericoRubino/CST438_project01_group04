@@ -8,32 +8,32 @@ import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.cst438_project01_group4.ClassObjects.Course;
+import com.example.cst438_project01_group4.ClassObjects.Assignment;
 import com.example.cst438_project01_group4.R;
 
 import java.util.List;
 
-public class GradeAppAdapter extends RecyclerView.Adapter<GradeAppAdapter.ViewHolder> {
-    private List<Course> mCoursesList;
+public class AssignmentAdapter extends RecyclerView.Adapter<AssignmentAdapter.ViewHolder> {
+    private List<Assignment> mAssignmentsList;
     private ItemClickListener clickListener;
     @Override
-    public GradeAppAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public AssignmentAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         Context context = parent.getContext();
         LayoutInflater inflater = LayoutInflater.from(context);
         // Inflate the custom layout
         View contactView = inflater.inflate(R.layout.my_recycler_text_view, parent, false);
         // Return a new holder instance
-        GradeAppAdapter.ViewHolder viewHolder = new GradeAppAdapter.ViewHolder(contactView);
+        AssignmentAdapter.ViewHolder viewHolder = new AssignmentAdapter.ViewHolder(contactView);
         return viewHolder;
     }
 
-    
+
 
     // Involves populating data into the item through holder
     @Override
-    public void onBindViewHolder(GradeAppAdapter.ViewHolder viewHolder, int position) {
+    public void onBindViewHolder(AssignmentAdapter.ViewHolder viewHolder, int position) {
         // Get the data model based on position
-        Course resItem = mCoursesList.get(position);
+        Assignment resItem = mAssignmentsList.get(position);
         // Set item views based on your views and data model
         TextView textView = viewHolder.logTextView;
         textView.setText(resItem.toString());
@@ -42,7 +42,7 @@ public class GradeAppAdapter extends RecyclerView.Adapter<GradeAppAdapter.ViewHo
     // Returns the total count of items in the list
     @Override
     public int getItemCount() {
-        return mCoursesList.size();
+        return mAssignmentsList.size();
     }
     public void setClickListener(ItemClickListener itemClickListener) {
         this.clickListener = itemClickListener;
@@ -65,7 +65,7 @@ public class GradeAppAdapter extends RecyclerView.Adapter<GradeAppAdapter.ViewHo
     }
 
     // Pass in the course array into the constructor
-    public GradeAppAdapter(List<Course> courseList) {
-        mCoursesList = courseList;
+    public AssignmentAdapter(List<Assignment> courseList) {
+        mAssignmentsList = courseList;
     }
 }

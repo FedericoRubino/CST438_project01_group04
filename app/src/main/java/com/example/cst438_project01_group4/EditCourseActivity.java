@@ -37,7 +37,6 @@ public class EditCourseActivity extends AppCompatActivity {
         setContentView(R.layout.activity_edit_course);
         Intent intent = getIntent();
         int courseId = intent.getIntExtra("EXTRA", -1);
-        // this is what Federico is adding
         mTitle = findViewById(R.id.courseNameEditText);
         mInstructor = findViewById(R.id.InstructorNameEditText);
         mDescription = findViewById(R.id.CourseDescriptionEditText);
@@ -58,10 +57,12 @@ public class EditCourseActivity extends AppCompatActivity {
         }
     }
 
-    // confirms input
+    /**
+     * This is where we check input.
+     * Then we update the database.
+     * @param view
+     */
     public void confirm(View view){
-        //This is where we check input
-        //Then we update the database
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Please confirm changes");
         Course course = getNewCourseValues();
@@ -71,23 +72,27 @@ public class EditCourseActivity extends AppCompatActivity {
             public void onClick(DialogInterface dialog, int which) {
                 updateCourse();
                 gradeAppDAO.update(editCourse);
-                Intent intent = ManageCourses.getIntent(getApplicationContext(), "");
+                Intent intent = ManageCourses.getIntent(getApplicationContext(), 0);
                 startActivity(intent);
             }
-
         });
+
         builder.setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                Intent intent = ManageCourses.getIntent(getApplicationContext(), "");
+                Intent intent = ManageCourses.getIntent(getApplicationContext(), 0);
                 startActivity(intent);
             }
-
         });
+
         AlertDialog dialog = builder.create();
         dialog.show();
     }
 
+    /**
+     * Checks user input for input not a blank line
+     * @return
+     */
     private Course getNewCourseValues(){
        String instructor;
        String title;
@@ -119,6 +124,9 @@ public class EditCourseActivity extends AppCompatActivity {
         return new Course(editCourse.getUserID(), instructor, title, description, courseStartTime, courseEndTime);
     }
 
+    /**
+     * If the user confirms the new values
+     */
     private void updateCourse(){
 
         if(!mTitle.getText().toString().isEmpty()){
@@ -134,7 +142,9 @@ public class EditCourseActivity extends AppCompatActivity {
         }
     }
 
-    // Intent factory
+    /**
+     * Intent factory
+     */
     public static Intent getIntent(Context context, int value){
         Intent intent = new Intent(context, EditCourseActivity.class);
         intent.putExtra("EXTRA",value);
@@ -142,7 +152,9 @@ public class EditCourseActivity extends AppCompatActivity {
         return intent;
     }
 
-    // returns the dao
+    /**
+     * DAO Factory
+     */
     private void getGradeAppDAO(){
         gradeAppDAO = Room.databaseBuilder(this, AppDatabase.class, AppDatabase.DB_NAME)
                 .allowMainThreadQueries()
