@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".ManageAssignments"
-            android:parentActivityName=".Login"
+            android:parentActivityName=".ManageCourses"
             android:label="Assignments"/>
         <activity android:name=".EditUserActivity"
             android:label="Edit User"
@@ -23,7 +23,7 @@
             android:label="Register New User"
             android:parentActivityName=".Login" />
         <activity android:name=".EditAssignmentActivity"
-            android:parentActivityName=".Login"
+            android:parentActivityName=".ManageAssignments"
             android:label="Edit Assignment"/>
         <activity android:name=".EditCourseActivity"
             android:label="Edit Course"

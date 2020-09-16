@@ -77,7 +77,7 @@ public class EditUserActivity extends AppCompatActivity {
             public void onClick(DialogInterface dialog, int which) {
                 updateUser();
                 mGradeAppDAO.update(muser);
-                Intent intent = ManageCourses.getIntent(getApplicationContext(), "");
+                Intent intent = ManageCourses.getIntent(getApplicationContext(), 0);
                 startActivity(intent);
             }
 
@@ -85,7 +85,7 @@ public class EditUserActivity extends AppCompatActivity {
         builder.setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                Intent intent = ManageCourses.getIntent(getApplicationContext(), "");
+                Intent intent = ManageCourses.getIntent(getApplicationContext(), 0);
                 startActivity(intent);
             }
 

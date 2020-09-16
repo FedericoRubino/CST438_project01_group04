@@ -44,7 +44,7 @@ public class RegisterActivity extends AppCompatActivity {
                 User newuser = new User(username, password, firstname, lastname);
                 mGradeAppDAO.insert(newuser);
 
-                Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
+                Intent intent = new Intent(RegisterActivity.this, Login.class);
                 startActivity(intent);
             }else{
                 Toast.makeText(getApplicationContext(), "Username already exists, please try again!", Toast.LENGTH_LONG).show();
