@@ -123,6 +123,18 @@ public interface GradeAppDAO {
     @Query("SELECT * FROM " + AppDatabase.USER_TABLE + " WHERE userID = :userID")
     User getUserByUserID(int userID);
 
+    // Queries that handle logged in statuses in the database
+
+    @Query("SELECT * FROM " + AppDatabase.USER_TABLE + " WHERE loggedIn = 1")
+    User getLoggedInUser();
+
+    @Query("UPDATE " + AppDatabase.USER_TABLE + " SET loggedIn = 1 WHERE username = :userName")
+    void setLoggedInUser(String userName);
+
+    @Query("UPDATE " + AppDatabase.USER_TABLE + " SET loggedIn = 0")
+    void logOutAllUsers();
+
+
     @Query("SELECT * FROM " + AppDatabase.USER_TABLE)
     List<User> getAllUsers();
 
