@@ -3,9 +3,8 @@ package com.example.cst438_project01_group4;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.room.Room;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.widget.Button;
+import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -16,11 +15,15 @@ import com.example.cst438_project01_group4.DataBase.GradeAppDAO;
 public class RegisterActivity extends AppCompatActivity {
 
     private GradeAppDAO mGradeAppDAO;
-    private EditText Newuser;
-    private EditText Newpassword;
-    private EditText Firstname;
-    private EditText Lastname;
-    private Button Sign;
+    private EditText mNewUser;
+    private EditText mNewpassword;
+    private EditText mFirstname;
+    private EditText mLastname;
+
+    String username;
+    String password;
+    String firstname;
+    String lastname;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,32 +31,41 @@ public class RegisterActivity extends AppCompatActivity {
         setContentView(R.layout.activity_register);
 
         getGradeAppDAO();
-        Newuser = findViewById(R.id.etNewuser);
-        Newpassword = findViewById(R.id.etNewpassword);
-        Firstname = findViewById(R.id.etEditfirstname);
-        Lastname = findViewById(R.id.etLastname);
-        Sign = findViewById(R.id.btnSign);
 
-        String username = Newuser.getText().toString();
-        String password = Newpassword.getText().toString();
-        String firstname = Firstname.getText().toString();
-        String lastname = Lastname.getText().toString();
-
-        Sign.setOnClickListener(v -> {
-            if(mGradeAppDAO.getAllUsers().isEmpty() || mGradeAppDAO.getUserByUsername(username) == null){
-                User newuser = new User(username, password, firstname, lastname);
-                mGradeAppDAO.insert(newuser);
-
-                Intent intent = new Intent(RegisterActivity.this, Login.class);
-                startActivity(intent);
-            }else{
-                Toast.makeText(getApplicationContext(), "Username already exists, please try again!", Toast.LENGTH_LONG).show();
-                Newuser.setError("Incorrect username!");
-            }
-        });
-
+        mNewUser = findViewById(R.id.etNewuser);
+        mNewpassword = findViewById(R.id.etNewpassword);
+        mFirstname = findViewById(R.id.etEditfirstname);
+        mLastname = findViewById(R.id.etLastname);
     }
 
+    /**
+     * Signs up a new user
+     * @param view
+     */
+    public void signUpUser(View view){
+        username = mNewUser.getText().toString();
+        password = mNewpassword.getText().toString();
+        firstname = mFirstname.getText().toString();
+        lastname = mLastname.getText().toString();
+        if(username.equals("") || password.equals("") || firstname.equals("") || lastname.equals("")){
+            Toast.makeText(getApplicationContext(), "Please fill out all of the fields", Toast.LENGTH_LONG).show();
+            return;
+        }
+        User newUser = mGradeAppDAO.getUserByUsername(username);
+        if(newUser == null){
+            newUser = new User(username,password,firstname,lastname);
+            Toast.makeText(getApplicationContext(), "Successfully added " + username, Toast.LENGTH_LONG).show();
+            mGradeAppDAO.insert(newUser);
+            finish();
+        } else {
+            Toast.makeText(getApplicationContext(), "A user with that username already exists", Toast.LENGTH_LONG).show();
+            return;
+        }
+    }
+
+    /**
+     *  DAO Factory
+     */
     private void getGradeAppDAO(){
         mGradeAppDAO = Room.databaseBuilder(this, AppDatabase.class, AppDatabase.DB_NAME)
                 .allowMainThreadQueries()
