@@ -8,6 +8,7 @@ import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.cst438_project01_group4.ClassObjects.Assignment;
 import com.example.cst438_project01_group4.ClassObjects.Course;
 import com.example.cst438_project01_group4.R;
 
@@ -37,6 +38,16 @@ public class GradeAppAdapter extends RecyclerView.Adapter<GradeAppAdapter.ViewHo
         // Set item views based on your views and data model
         TextView textView = viewHolder.logTextView;
         textView.setText(resItem.toString());
+    }
+
+
+    /**
+     * updates the objects on the recycler view
+     * @param courses
+     */
+    public void setData(List<Course> courses){
+        mCoursesList = courses;
+        notifyDataSetChanged();
     }
 
     // Returns the total count of items in the list

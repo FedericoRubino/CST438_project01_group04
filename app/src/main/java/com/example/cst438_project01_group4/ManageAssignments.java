@@ -32,6 +32,7 @@ public class ManageAssignments extends AppCompatActivity implements ItemClickLis
     private static List<Assignment> assignments;
     private Assignment clickedAssignment;
     private GradeCategory category;
+    private int courseID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,7 +42,8 @@ public class ManageAssignments extends AppCompatActivity implements ItemClickLis
 
 
         getGradeAppDAO();
-        assignments = gradeAppDAO.getAssignmentsByCourseID(getIntent().getIntExtra("EXTRA", -1));
+        courseID = getIntent().getIntExtra("EXTRA", -1);
+        assignments = gradeAppDAO.getAssignmentsByCourseID(courseID);
 
         recyclerView = findViewById(R.id.rvAssignments);
         recyclerView.setHasFixedSize(true);
@@ -111,6 +113,8 @@ public class ManageAssignments extends AppCompatActivity implements ItemClickLis
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 gradeAppDAO.delete(clickedAssignment);
+                assignments = gradeAppDAO.getAssignmentsByCourseID(courseID);
+                mAdapter.setData(assignments);
                 dialog.cancel();
             }
         });

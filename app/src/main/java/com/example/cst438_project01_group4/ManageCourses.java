@@ -132,6 +132,8 @@ public class ManageCourses extends AppCompatActivity implements ItemClickListene
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 gradeAppDAO.delete(clickedCourse);
+                courses = gradeAppDAO.getAllCoursesByUserID(loggedInUser.getUserID());
+                mAdapter.setData(courses);
                 dialog.cancel();
             }
         });
