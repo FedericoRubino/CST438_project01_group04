@@ -82,6 +82,11 @@ public class ManageCourses extends AppCompatActivity implements ItemClickListene
         showAlertDialogButtonClicked(view);
     }
 
+
+    /**
+     * Alert screen that shows up when clicking on a specific element
+     * @param view
+     */
     public void showAlertDialogButtonClicked(View view) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Course Details");
@@ -104,13 +109,44 @@ public class ManageCourses extends AppCompatActivity implements ItemClickListene
         builder.setNegativeButton("DELETE", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
+//                gradeAppDAO.delete(clickedCourse);
                 dialog.cancel();
+                showAlertDelete(view);
             }
 
         });
         AlertDialog alert = builder.create();
         alert.show();
     }
+
+
+    /**
+     * Alert screen that shows up when clicking on a specific element
+     * @param view
+     */
+    public void showAlertDelete(View view) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Delete Course");
+        builder.setMessage(clickedCourse.toString());
+        builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                gradeAppDAO.delete(clickedCourse);
+                courses = gradeAppDAO.getAllCoursesByUserID(loggedInUser.getUserID());
+                mAdapter.setData(courses);
+                dialog.cancel();
+            }
+        });
+        builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+        AlertDialog alert = builder.create();
+        alert.show();
+    }
+
 
     /**
      * DAO Factory

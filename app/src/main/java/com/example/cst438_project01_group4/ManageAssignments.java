@@ -32,6 +32,7 @@ public class ManageAssignments extends AppCompatActivity implements ItemClickLis
     private static List<Assignment> assignments;
     private Assignment clickedAssignment;
     private GradeCategory category;
+    private int courseID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,7 +42,8 @@ public class ManageAssignments extends AppCompatActivity implements ItemClickLis
 
 
         getGradeAppDAO();
-        assignments = gradeAppDAO.getAssignmentsByCourseID(getIntent().getIntExtra("EXTRA", -1));
+        courseID = getIntent().getIntExtra("EXTRA", -1);
+        assignments = gradeAppDAO.getAssignmentsByCourseID(courseID);
 
         recyclerView = findViewById(R.id.rvAssignments);
         recyclerView.setHasFixedSize(true);
@@ -88,13 +90,44 @@ public class ManageAssignments extends AppCompatActivity implements ItemClickLis
         builder.setNegativeButton("DELETE", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
+
                 dialog.cancel();
+                showAlertDelete(view);
+
             }
 
         });
         AlertDialog alert = builder.create();
         alert.show();
     }
+
+    /**
+     * Alert screen that shows up when clicking on a specific element
+     * @param view
+     */
+    public void showAlertDelete(View view) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Delete Course");
+        builder.setMessage(clickedAssignment.toString());
+        builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                gradeAppDAO.delete(clickedAssignment);
+                assignments = gradeAppDAO.getAssignmentsByCourseID(courseID);
+                mAdapter.setData(assignments);
+                dialog.cancel();
+            }
+        });
+        builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+        AlertDialog alert = builder.create();
+        alert.show();
+    }
+
 
     /**
      * DAO Factory

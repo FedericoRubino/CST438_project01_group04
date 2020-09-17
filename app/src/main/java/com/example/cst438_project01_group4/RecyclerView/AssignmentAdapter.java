@@ -27,7 +27,14 @@ public class AssignmentAdapter extends RecyclerView.Adapter<AssignmentAdapter.Vi
         return viewHolder;
     }
 
-
+    /**
+     * updates the objects on the recycler view
+     * @param assignments
+     */
+    public void setData(List<Assignment> assignments){
+        mAssignmentsList = assignments;
+        notifyDataSetChanged();
+    }
 
     // Involves populating data into the item through holder
     @Override
