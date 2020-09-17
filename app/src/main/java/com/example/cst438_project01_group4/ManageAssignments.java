@@ -88,13 +88,42 @@ public class ManageAssignments extends AppCompatActivity implements ItemClickLis
         builder.setNegativeButton("DELETE", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
+
                 dialog.cancel();
+                showAlertDelete(view);
+
             }
 
         });
         AlertDialog alert = builder.create();
         alert.show();
     }
+
+    /**
+     * Alert screen that shows up when clicking on a specific element
+     * @param view
+     */
+    public void showAlertDelete(View view) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Delete Course");
+        builder.setMessage(clickedAssignment.toString());
+        builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                gradeAppDAO.delete(clickedAssignment);
+                dialog.cancel();
+            }
+        });
+        builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+        AlertDialog alert = builder.create();
+        alert.show();
+    }
+
 
     /**
      * DAO Factory
