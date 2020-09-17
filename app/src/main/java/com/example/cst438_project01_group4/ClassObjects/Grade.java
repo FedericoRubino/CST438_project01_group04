@@ -11,7 +11,6 @@ public class Grade {
     private int gradeID;
 
     private double score;
-    //private int courseID;
     private int courseID;
 
     public Grade(double score, int courseID) {

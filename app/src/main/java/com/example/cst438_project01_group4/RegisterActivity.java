@@ -1,12 +1,14 @@
 package com.example.cst438_project01_group4;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.room.Room;
-
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.room.Room;
 
 import com.example.cst438_project01_group4.ClassObjects.User;
 import com.example.cst438_project01_group4.DataBase.AppDatabase;
@@ -71,5 +73,16 @@ public class RegisterActivity extends AppCompatActivity {
                 .allowMainThreadQueries()
                 .build()
                 .getGradeAppDao();
+    }
+
+    /**
+     * Intent Factory
+     * @param context
+     * @return
+     */
+    public static Intent getIntent(Context context){
+        Intent intent = new Intent(context, RegisterActivity.class);
+
+        return intent;
     }
 }

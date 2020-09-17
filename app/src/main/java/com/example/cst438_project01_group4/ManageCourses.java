@@ -47,9 +47,7 @@ public class ManageCourses extends AppCompatActivity implements ItemClickListene
 
         loggedInUser = gradeAppDAO.getLoggedInUser();
         TextView mTitle = (TextView) findViewById(R.id.manageCourses);
-        mTitle.setText("Courses for " + loggedInUser);
-//        loggedInUser = gradeAppDAO.getUserByUserID(getIntent().getIntExtra("EXTRA", -1));
-//        Toast.makeText(ManageCourses.this, "User Assignments" + gradeAppDAO.getAllCoursesByUserID(loggedInUser.getUserID()).size() +  "\nUserID " + loggedInUser.getUserID(), Toast.LENGTH_LONG).show();
+        mTitle.setText("Courses for " + loggedInUser.getUsername());
         courses = gradeAppDAO.getAllCoursesByUserID(loggedInUser.getUserID());
         List<Assignment> assignments = new ArrayList<>();
         for(Course c: courses){
@@ -74,7 +72,22 @@ public class ManageCourses extends AppCompatActivity implements ItemClickListene
                 startActivity(intent);
             }
         });
+        findViewById(R.id.editUserBtn).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = EditUserActivity.getIntent(getApplicationContext(), loggedInUser.getUserID());
+                startActivity(intent);
+            }
+        });
+
+        findViewById(R.id.logoutBtn).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+               logout(v);
+            }
+        });
     }
+
 
     @Override
     public void onClick(View view, int position) {
@@ -177,7 +190,7 @@ public class ManageCourses extends AppCompatActivity implements ItemClickListene
      */
     public void logout(View view){
         gradeAppDAO.logOutAllUsers();
-        finish();
+        startActivity(Login.getIntent(getApplicationContext(), -1));
     }
 
     public double getCourseGrade(List<Assignment> assignmentList){

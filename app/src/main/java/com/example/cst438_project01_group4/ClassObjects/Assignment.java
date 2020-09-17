@@ -13,14 +13,12 @@ public class Assignment {
     private String details;
     private int maxScore;
     private double earnedScore;
-//    private Date assignedDate;
+//    private Date assignedDate; Can be added later - there were formatting issues
 //    private Date dueDate;
     private int categoryID;
     private int courseID;
     private double unweightedGrade;
 
-//    private int gradeID;
-//    private int userID;
 
     public Assignment(String details, int maxScore, double earnedScore, int categoryID, int courseID) {
         this.details = details;

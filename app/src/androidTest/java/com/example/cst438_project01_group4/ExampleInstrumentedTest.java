@@ -2,11 +2,10 @@ package com.example.cst438_project01_group4;
 
 import android.content.Context;
 import android.content.Intent;
-import android.widget.Toast;
 
 import androidx.room.Room;
-import androidx.test.platform.app.InstrumentationRegistry;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
+import androidx.test.platform.app.InstrumentationRegistry;
 
 import com.example.cst438_project01_group4.ClassObjects.Assignment;
 import com.example.cst438_project01_group4.ClassObjects.Course;
@@ -17,15 +16,18 @@ import com.example.cst438_project01_group4.DataBase.AppDatabase;
 import com.example.cst438_project01_group4.DataBase.GradeAppDAO;
 
 import org.junit.Before;
-import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 
 /**
  * Instrumented test, which will execute on an Android device.
@@ -79,13 +81,11 @@ public class ExampleInstrumentedTest {
     public void testAssignment(){
         Assignment assignment = null;
         assertNull(assignment);
-        assignment = new Assignment("detail",100,80,new Date(),new Date(),0,0);
+        assignment = new Assignment("detail",100,80, 0, 0);
         assertNotNull(assignment);
         assertEquals("detail", assignment.getDetails());
         assertEquals(100, assignment.getMaxScore());
         assertEquals(80, assignment.getEarnedScore(), 0.0);
-        assertNotNull(assignment.getAssignedDate());
-        assertNotNull(assignment.getDueDate());
         assertEquals(0, assignment.getCategoryID());
         assertEquals(0, assignment.getCourseID());
     }
@@ -112,13 +112,11 @@ public class ExampleInstrumentedTest {
     public void testCourse(){
         Course course = null;
         assertNull(course);
-        course = new Course(0,"instructor","title", "foobar", new Date(),new Date());
+        course = new Course(0,"instructor","title", "foobar");
         assertNotNull(course);
         assertEquals("instructor", course.getInstructor());
         assertEquals("title", course.getTitle());
         assertEquals("foobar", course.getDescription());
-        assertNotNull(course.getStartDate());
-        assertNotNull(course.getEndDate());
         assertEquals(0, course.getUserID());
         assertEquals(0, course.getCourseID());
     }
@@ -130,12 +128,10 @@ public class ExampleInstrumentedTest {
     public void testGrade(){
         Grade grade = null;
         assertNull(grade);
-        grade = new Grade(100,0, new Date(),0);
+        grade = new Grade(100.0,0);
         assertNotNull(grade);
-        assertEquals(100, grade.getScore(), 0.0);
-        assertNotNull(grade.getDateEarned());
-        assertEquals(0, grade.getUserID());
-        assertEquals(0, grade.getAssignmentID());
+        assertEquals(100.0, grade.getScore(), 0.0);
+        assertEquals(0, grade.getCourseID());
     }
 
     /**

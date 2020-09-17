@@ -159,6 +159,10 @@ public interface GradeAppDAO {
     List<Course> getAllCoursesByUserID(int userID);
 
     // get a list of courses based on userID
+    @Query("Select * from " + AppDatabase.ASSIGNMENT_TABLE + " WHERE courseID = :courseID")
+    List<Assignment> getAllAssignmentsByCourseID(int courseID);
+
+    // get a list of courses based on userID
     @Query("Select * from " + AppDatabase.COURSE_TABLE + " WHERE userID = :userID")
     Course getCourseByUserID(int userID);
 

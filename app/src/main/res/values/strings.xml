@@ -7,4 +7,6 @@
     <string name="logout">LOGOUT</string>
     <string name="addCourse">ADD COURSE</string>
     <string name="addAssignment">ADD ASSIGNMENT</string>
+    <string name="editUser">EDIT USER</string>
+    <string name="exitBtn">EXIT</string>
 </resources>
