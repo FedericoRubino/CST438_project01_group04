@@ -22,34 +22,36 @@
 
     <EditText
         android:id="@+id/etDetails"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="272dp"
+        android:layout_height="51dp"
         android:ems="10"
         android:hint="details"
         android:inputType="textPersonName"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.507"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvAddAssignment"
         app:layout_constraintVertical_bias="0.1" />
 
     <EditText
         android:id="@+id/etMaxScore"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="272dp"
+        android:layout_height="51dp"
         android:ems="10"
         android:hint="max score ex: 100"
         android:inputType="textPersonName"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.503"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/etDetails"
-        app:layout_constraintVertical_bias="0.1" />
+        app:layout_constraintVertical_bias="0.069" />
 
     <EditText
         android:id="@+id/etEarnedScore"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="272dp"
+        android:layout_height="51dp"
         android:ems="10"
         android:hint="earned score (decimals are ok)"
         android:inputType="textPersonName"
@@ -60,24 +62,26 @@
         app:layout_constraintVertical_bias="0.1" />
 
     <Spinner
-        android:id="@+id/categories_spinner"
-        android:layout_width="211dp"
-        android:layout_height="32dp"
+        android:id="@+id/addCategories_spinner"
+        android:layout_width="276dp"
+        android:layout_height="36dp"
+        android:layout_marginTop="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/etEarnedScore" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/addButton"
         android:layout_width="210sp"
         android:layout_height="60sp"
+        android:layout_marginTop="32dp"
         android:backgroundTint="#3487C8"
         android:text="Add"
         android:textColor="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/categories_spinner"
+        app:layout_constraintTop_toBottomOf="@+id/addCategories_spinner"
         app:layout_constraintVertical_bias="0.1" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

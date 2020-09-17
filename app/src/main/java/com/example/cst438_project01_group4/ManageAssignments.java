@@ -37,7 +37,7 @@ public class ManageAssignments extends AppCompatActivity implements ItemClickLis
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_manage_assignments);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
 
         getGradeAppDAO();
@@ -56,10 +56,11 @@ public class ManageAssignments extends AppCompatActivity implements ItemClickLis
             Toast.makeText(ManageAssignments.this, "No Assignments added", Toast.LENGTH_LONG).show();
         }
 
+
         findViewById(R.id.addAssignmentBtn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = AddAssignment.getIntent(getApplicationContext());
+                Intent intent = AddAssignment.getIntent(getApplicationContext(), getIntent().getIntExtra("EXTRA", -1));
                 startActivity(intent);
             }
         });

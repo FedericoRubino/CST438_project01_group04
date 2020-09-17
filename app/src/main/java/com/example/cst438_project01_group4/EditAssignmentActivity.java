@@ -94,7 +94,7 @@ public class EditAssignmentActivity extends AppCompatActivity implements Adapter
 
 
     /**
-     * Asks the User to confirm thier changes to the Assignment with an alert
+     * Asks the User to confirm there changes to the Assignment with an alert
      * @param view
      */
     public void confirm(View view){

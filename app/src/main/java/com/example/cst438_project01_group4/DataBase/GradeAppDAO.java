@@ -35,6 +35,9 @@ public interface GradeAppDAO {
     @Query("Select * FROM " + AppDatabase.ASSIGNMENT_TABLE + " WHERE assignmentID = :assignmentId")
     public Assignment getAssignmentById(int assignmentId);
 
+    @Query("Select * FROM " + AppDatabase.ASSIGNMENT_TABLE + " WHERE details = :details")
+    public Assignment getAssignmentByName(String details);
+
     //Course Queries
 
     @Insert
