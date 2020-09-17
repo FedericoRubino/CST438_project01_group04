@@ -53,7 +53,7 @@ public class AddCourseActivity extends AppCompatActivity {
         quizEditText = findViewById(R.id.etQuizWeight);
         testEditText = findViewById(R.id.etTestWeight);
 
-        submitBtn = findViewById(R.id.button);
+        submitBtn = findViewById(R.id.addCourseBtn);
         submitBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -76,6 +76,13 @@ public class AddCourseActivity extends AppCompatActivity {
                 else{
                     goodCourse(v);
                 }
+            }
+        });
+        findViewById(R.id.exitCourse).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = ManageCourses.getIntent(getApplicationContext(), mGradeAppDAO.getLoggedInUser().getUserID());
+                startActivity(intent);
             }
         });
     }

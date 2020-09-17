@@ -117,18 +117,34 @@ public class EditUserActivity extends AppCompatActivity {
             password = editPassword.getText().toString();
             firstname = editFirstname.getText().toString();
             lastname = editLastname.getText().toString();
+        if(!username.equals("")) {
+            User checkUser = mGradeAppDAO.getUserByUsername(username);
+            if(checkUser != null){
+                Toast.makeText(getApplicationContext(), "A user with that username already exists", Toast.LENGTH_LONG).show();
+                return;
+            }
+        }
+        checkValues();
 
-        User checkUser = mGradeAppDAO.getUserByUsername(username);
-        if(checkUser != null) {
-            Toast.makeText(getApplicationContext(), "A user with that username already exists", Toast.LENGTH_LONG).show();
-            return;
+        confirm(new User(username, password, firstname, lastname));
+
+    }
+
+    private void checkValues(){
+        if(username.equals("")) {
+            username = preUsername;
         }
-        else if(username.equals("") || password.equals("") || firstname.equals("") || lastname.equals("")){
-            Toast.makeText(getApplicationContext(), "Please fill out all of the fields", Toast.LENGTH_LONG).show();
-            return;
+
+        if(password.equals("")){
+            password = prePassword;
         }
-        else {
-            confirm(new User(username, password, firstname, lastname));
+
+        if(firstname.equals("")){
+            firstname = preFirstname;
+        }
+
+        if(lastname.equals("")){
+           lastname = preLastname;
         }
     }
 

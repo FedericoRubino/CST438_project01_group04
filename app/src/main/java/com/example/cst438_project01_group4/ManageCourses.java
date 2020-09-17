@@ -79,7 +79,15 @@ public class ManageCourses extends AppCompatActivity implements ItemClickListene
                 startActivity(intent);
             }
         });
+
+        findViewById(R.id.logoutBtn).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+               logout(v);
+            }
+        });
     }
+
 
     @Override
     public void onClick(View view, int position) {
@@ -182,7 +190,7 @@ public class ManageCourses extends AppCompatActivity implements ItemClickListene
      */
     public void logout(View view){
         gradeAppDAO.logOutAllUsers();
-        finish();
+        startActivity(Login.getIntent(getApplicationContext(), -1));
     }
 
     public double getCourseGrade(List<Assignment> assignmentList){

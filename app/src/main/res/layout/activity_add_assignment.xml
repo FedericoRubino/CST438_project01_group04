@@ -71,6 +71,20 @@
         app:layout_constraintTop_toBottomOf="@+id/etEarnedScore" />
 
     <Button
+        android:id="@+id/exitAssignment"
+        android:layout_width="210sp"
+        android:layout_height="60sp"
+        android:layout_marginTop="10dp"
+        android:backgroundTint="#C83966"
+        android:text="@string/exitBtn"
+        android:textColor="#FFFFFF"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/addButton"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <Button
         android:id="@+id/addButton"
         android:layout_width="210sp"
         android:layout_height="60sp"

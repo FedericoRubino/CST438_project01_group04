@@ -71,6 +71,13 @@ public class AddAssignment extends AppCompatActivity implements AdapterView.OnIt
 
             }
         });
+        findViewById(R.id.exitBtn).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = ManageAssignments.getIntent(getApplicationContext(), mGradeAppDAO.getLoggedInUser().getUserID());
+                startActivity(intent);
+            }
+        });
     }
 
     private void setSpinner(){
