@@ -12,7 +12,7 @@
         android:layout_height="90dp"
         android:text="Add Assignment Information"
         android:textAlignment="center"
-        android:textSize="30sp"
+        android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -29,10 +29,10 @@
         android:inputType="textPersonName"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.507"
+        app:layout_constraintHorizontal_bias="0.503"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvAddAssignment"
-        app:layout_constraintVertical_bias="0.1" />
+        app:layout_constraintVertical_bias="0.062" />
 
     <EditText
         android:id="@+id/etMaxScore"

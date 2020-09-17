@@ -47,9 +47,7 @@ public class ManageCourses extends AppCompatActivity implements ItemClickListene
 
         loggedInUser = gradeAppDAO.getLoggedInUser();
         TextView mTitle = (TextView) findViewById(R.id.manageCourses);
-        mTitle.setText("Courses for " + loggedInUser);
-//        loggedInUser = gradeAppDAO.getUserByUserID(getIntent().getIntExtra("EXTRA", -1));
-//        Toast.makeText(ManageCourses.this, "User Assignments" + gradeAppDAO.getAllCoursesByUserID(loggedInUser.getUserID()).size() +  "\nUserID " + loggedInUser.getUserID(), Toast.LENGTH_LONG).show();
+        mTitle.setText("Courses for " + loggedInUser.getUsername());
         courses = gradeAppDAO.getAllCoursesByUserID(loggedInUser.getUserID());
         List<Assignment> assignments = new ArrayList<>();
         for(Course c: courses){
@@ -71,6 +69,13 @@ public class ManageCourses extends AppCompatActivity implements ItemClickListene
             @Override
             public void onClick(View v) {
                 Intent intent = AddCourseActivity.getIntent(getApplicationContext());
+                startActivity(intent);
+            }
+        });
+        findViewById(R.id.editUserBtn).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = EditUserActivity.getIntent(getApplicationContext(), loggedInUser.getUserID());
                 startActivity(intent);
             }
         });

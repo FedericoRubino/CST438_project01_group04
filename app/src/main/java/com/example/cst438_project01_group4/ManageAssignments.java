@@ -54,7 +54,7 @@ public class ManageAssignments extends AppCompatActivity implements ItemClickLis
         mAdapter.setClickListener(ManageAssignments.this);
 
 
-        if(gradeAppDAO.getAllAssignments().size() == 0) {
+        if(gradeAppDAO.getAllAssignmentsByCourseID(courseID).size() == 0) {
             Toast.makeText(ManageAssignments.this, "No Assignments added", Toast.LENGTH_LONG).show();
         }
 
