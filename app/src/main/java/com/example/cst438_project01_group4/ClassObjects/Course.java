@@ -5,8 +5,6 @@ import androidx.room.PrimaryKey;
 
 import com.example.cst438_project01_group4.DataBase.AppDatabase;
 
-import java.util.Date;
-
 @Entity(tableName = AppDatabase.COURSE_TABLE)
 public class Course {
     @PrimaryKey(autoGenerate = true)
@@ -15,17 +13,29 @@ public class Course {
     private String instructor;
     private String title;
     private String description;
-    private Date startDate;
-    private Date endDate;
+//    private Date startDate;
+//    private Date endDate;
     private int userID;
+    private double grade;
 
-    public Course(int userID, String instructor, String title, String description, Date startDate, Date endDate) {
+    public Course(int userID, String instructor, String title, String description) {
         this.instructor = instructor;
         this.title = title;
         this.description = description;
-        this.startDate = startDate;
-        this.endDate = endDate;
         this.userID = userID;
+        grade = 100;
+    }
+
+    public void setUserID(int userID) {
+        this.userID = userID;
+    }
+
+    public double getGrade() {
+        return grade;
+    }
+
+    public void setGrade(double grade) {
+        this.grade = grade;
     }
 
     public int getUserID() {
@@ -64,24 +74,8 @@ public class Course {
         this.description = description;
     }
 
-    public Date getStartDate() {
-        return startDate;
-    }
-
-    public void setStartDate(Date startDate) {
-        this.startDate = startDate;
-    }
-
-    public Date getEndDate() {
-        return endDate;
-    }
-
-    public void setEndDate(Date endDate) {
-        this.endDate = endDate;
-    }
-
     @Override
     public String toString() {
-        return title + "\n" + instructor + "\n" + description + "\n";
+        return "Course: " + title + "\nInstructor: " + instructor + "\nDescription: " + description + "\n" + "Weighted Grade: " + grade + "%";
     }
 }

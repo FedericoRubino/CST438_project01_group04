@@ -4,8 +4,8 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -37,7 +37,7 @@ public class ManageAssignments extends AppCompatActivity implements ItemClickLis
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_manage_assignments);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
 
         getGradeAppDAO();
@@ -50,6 +50,20 @@ public class ManageAssignments extends AppCompatActivity implements ItemClickLis
         mAdapter = new AssignmentAdapter(assignments);
         recyclerView.setAdapter(mAdapter);
         mAdapter.setClickListener(ManageAssignments.this);
+
+
+        if(gradeAppDAO.getAllAssignments().size() == 0) {
+            Toast.makeText(ManageAssignments.this, "No Assignments added", Toast.LENGTH_LONG).show();
+        }
+
+
+        findViewById(R.id.addAssignmentBtn).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = AddAssignment.getIntent(getApplicationContext(), getIntent().getIntExtra("EXTRA", -1));
+                startActivity(intent);
+            }
+        });
     }
 
     @Override
@@ -71,7 +85,7 @@ public class ManageAssignments extends AppCompatActivity implements ItemClickLis
 
             }
         });
-        builder.setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
+        builder.setNegativeButton("DELETE", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.cancel();

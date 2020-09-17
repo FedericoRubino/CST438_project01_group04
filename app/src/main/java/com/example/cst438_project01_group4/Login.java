@@ -43,7 +43,7 @@ public class Login extends AppCompatActivity {
                 boolean pass = true;
                 if (checkForUserInDatabase(Username.getText().toString())) {
                     User account = mGradeAppDAO.getUserByUsername(Username.getText().toString());
-                    Toast.makeText(Login.this, "UserID " + account.getUserID() + "User courses" + mGradeAppDAO.getAllCoursesByUserID(account.getUserID()).size(), Toast.LENGTH_LONG).show();
+                    //Toast.makeText(Login.this, "UserID " + account.getUserID() + "User courses" + mGradeAppDAO.getAllCoursesByUserID(account.getUserID()).size(), Toast.LENGTH_LONG).show();
                     if (!Username.getText().toString().equals(account.getUsername())) {
                         Username.setError("Incorrect username!!!");
                         pass = false;

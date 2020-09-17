@@ -9,27 +9,36 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ManageAssignments"
-            android:parentActivityName=".ManageCourses"
-            android:label="Assignments"/>
-        <activity android:name=".EditUserActivity"
+        <activity android:name=".AddAssignment"></activity>
+        <activity
+            android:name=".ManageAssignments"
+            android:label="Assignments"
+            android:parentActivityName=".ManageCourses" />
+        <activity
+            android:name=".EditUserActivity"
             android:label="Edit User"
-            android:parentActivityName=".Login"/>
-        <activity android:name=".AddCourseActivity"
-            android:label="Add New Course"/>
-        <activity android:name=".Login"
-            android:label="Login Page"/>
-        <activity android:name=".RegisterActivity"
+            android:parentActivityName=".Login" />
+        <activity
+            android:name=".AddCourseActivity"
+            android:label="Add New Course" />
+        <activity
+            android:name=".Login"
+            android:label="Login Page" />
+        <activity
+            android:name=".RegisterActivity"
             android:label="Register New User"
             android:parentActivityName=".Login" />
-        <activity android:name=".EditAssignmentActivity"
-            android:parentActivityName=".ManageAssignments"
-            android:label="Edit Assignment"/>
-        <activity android:name=".EditCourseActivity"
+        <activity
+            android:name=".EditAssignmentActivity"
+            android:label="Edit Assignment"
+            android:parentActivityName=".ManageAssignments" />
+        <activity
+            android:name=".EditCourseActivity"
             android:label="Edit Course"
             android:parentActivityName=".ManageCourses" />
-        <activity android:name=".ManageCourses"
-            android:label="Courses"/>
+        <activity
+            android:name=".ManageCourses"
+            android:label="Courses" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
