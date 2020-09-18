@@ -5,6 +5,9 @@ import androidx.room.PrimaryKey;
 
 import com.example.cst438_project01_group4.DataBase.AppDatabase;
 
+/**
+ * Grade class, used to store grades in our database
+ */
 @Entity(tableName = AppDatabase.GRADE_TABLE)
 public class Grade {
     @PrimaryKey(autoGenerate = true)

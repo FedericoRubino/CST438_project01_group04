@@ -5,6 +5,9 @@ import androidx.room.PrimaryKey;
 
 import com.example.cst438_project01_group4.DataBase.AppDatabase;
 
+/**
+ * Course Class for our database
+ */
 @Entity(tableName = AppDatabase.COURSE_TABLE)
 public class Course {
     @PrimaryKey(autoGenerate = true)
@@ -76,6 +79,6 @@ public class Course {
 
     @Override
     public String toString() {
-        return "Course: " + title + "\nInstructor: " + instructor + "\nDescription: " + description + "\n" + "Weighted Grade: " + grade + "%";
+        return "Course: " + title + "\nInstructor: " + instructor + "\nDescription: " + description + "\n" + "Weighted Grade: " + Math.round(grade) + "%";
     }
 }

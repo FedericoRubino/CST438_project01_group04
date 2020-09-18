@@ -25,7 +25,8 @@
         android:textColor="#FFFFFF"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/rvAssignments">
+        app:layout_constraintTop_toBottomOf="@+id/rvAssignments"
+        android:onClick="addAssignment">
 
     </Button>
 

@@ -5,6 +5,11 @@ import androidx.room.PrimaryKey;
 
 import com.example.cst438_project01_group4.DataBase.AppDatabase;
 
+
+/**
+ * Assignment class
+ * Used to store assignment information
+ */
 @Entity(tableName = AppDatabase.ASSIGNMENT_TABLE)
 public class Assignment {
     @PrimaryKey(autoGenerate = true)
