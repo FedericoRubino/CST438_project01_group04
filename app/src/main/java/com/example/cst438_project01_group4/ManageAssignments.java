@@ -38,13 +38,16 @@ public class ManageAssignments extends AppCompatActivity implements ItemClickLis
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_manage_assignments);
-        //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
-
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getGradeAppDAO();
-        courseID = getIntent().getIntExtra("EXTRA", -1);
-        assignments = gradeAppDAO.getAssignmentsByCourseID(courseID);
 
+        // in the case that this activity is called without an intent the value will be -1
+        // and we will keep the original courseID
+        int temp = getIntent().getIntExtra("EXTRA", -1);
+        if(temp != -1) {
+            courseID = temp;
+        }
+        assignments = gradeAppDAO.getAssignmentsByCourseID(courseID);
         recyclerView = findViewById(R.id.rvAssignments);
         recyclerView.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(this);
@@ -53,19 +56,18 @@ public class ManageAssignments extends AppCompatActivity implements ItemClickLis
         recyclerView.setAdapter(mAdapter);
         mAdapter.setClickListener(ManageAssignments.this);
 
-
-        if(gradeAppDAO.getAllAssignmentsByCourseID(courseID).size() == 0) {
-            Toast.makeText(ManageAssignments.this, "No Assignments added", Toast.LENGTH_LONG).show();
+        if(assignments.size() == 0) {
+            Toast.makeText(ManageAssignments.this, "No Assignments added", Toast.LENGTH_SHORT).show();
         }
+    }
 
-
-        findViewById(R.id.addAssignmentBtn).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = AddAssignment.getIntent(getApplicationContext(), getIntent().getIntExtra("EXTRA", -1));
-                startActivity(intent);
-            }
-        });
+    /**
+     *
+     * @param view
+     */
+    public void addAssignment(View view){
+        Intent intent = AddAssignment.getIntent(getApplicationContext(), getIntent().getIntExtra("EXTRA", -1));
+        startActivity(intent);
     }
 
     @Override
@@ -90,10 +92,8 @@ public class ManageAssignments extends AppCompatActivity implements ItemClickLis
         builder.setNegativeButton("DELETE", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-
                 dialog.cancel();
                 showAlertDelete(view);
-
             }
 
         });
@@ -127,7 +127,6 @@ public class ManageAssignments extends AppCompatActivity implements ItemClickLis
         AlertDialog alert = builder.create();
         alert.show();
     }
-
 
     /**
      * DAO Factory

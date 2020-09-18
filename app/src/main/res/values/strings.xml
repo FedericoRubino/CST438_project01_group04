@@ -9,4 +9,5 @@
     <string name="addAssignment">ADD ASSIGNMENT</string>
     <string name="editUser">EDIT USER</string>
     <string name="exitBtn">EXIT</string>
+    <string name="cancel">Cancel</string>
 </resources>

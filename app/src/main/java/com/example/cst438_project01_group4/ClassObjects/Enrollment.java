@@ -6,7 +6,10 @@ import androidx.room.PrimaryKey;
 import com.example.cst438_project01_group4.DataBase.AppDatabase;
 
 import java.util.Date;
-//Not using this class currently
+
+/**
+ * Enrollment class, we never actually used this
+ */
 @Entity(tableName = AppDatabase.ENROLLMENT_TABLE)
 public class Enrollment {
     @PrimaryKey(autoGenerate = true)

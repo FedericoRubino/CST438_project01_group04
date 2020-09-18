@@ -38,18 +38,17 @@ public class EditAssignmentActivity extends AppCompatActivity implements Adapter
     private List<GradeCategory> categories;
     private List<String> categoriesNames;
     Spinner spinner;
+    int courseId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_assignment);
         getGradeAppDAO();
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
 
         Intent intent = getIntent();
         int assignmentId = intent.getIntExtra("EXTRA", -1);
-        int courseId = gradeAppDAO.getAssignmentById(assignmentId).getCourseID();
+        courseId = gradeAppDAO.getAssignmentById(assignmentId).getCourseID();
         mDetails = findViewById(R.id.AssignmentDetailsEditText);
         mMaxScore = findViewById(R.id.MaxScoreEditText);
         mEarnedScore = findViewById(R.id.EarnedScoreEditText);
@@ -92,7 +91,6 @@ public class EditAssignmentActivity extends AppCompatActivity implements Adapter
         return stringCategories;
     }
 
-
     /**
      * Asks the User to confirm there changes to the Assignment with an alert
      * @param view
@@ -112,7 +110,6 @@ public class EditAssignmentActivity extends AppCompatActivity implements Adapter
                 Intent intent = ManageAssignments.getIntent(getApplicationContext(), gradeAppDAO.getCourseById(editAssignment.getCourseID()).getUserID());
                 startActivity(intent);
             }
-
         });
         builder.setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
             @Override
@@ -120,7 +117,6 @@ public class EditAssignmentActivity extends AppCompatActivity implements Adapter
                 Intent intent = ManageCourses.getIntent(getApplicationContext(), 0);
                 startActivity(intent);
             }
-
         });
         AlertDialog dialog = builder.create();
         dialog.show();
@@ -159,6 +155,11 @@ public class EditAssignmentActivity extends AppCompatActivity implements Adapter
         }
 
         return new Assignment(assignmentDetails, assignmentMaxScore, assignmentEarnedScore, getGradeCategory(), editAssignment.getCourseID());
+    }
+
+    public void cancel(View view){
+        Intent intent = ManageAssignments.getIntent(getApplicationContext(), courseId );
+        startActivity(intent);
     }
 
     /**

@@ -17,7 +17,7 @@
         <activity
             android:name=".EditUserActivity"
             android:label="Edit User"
-            android:parentActivityName=".Login" />
+            android:parentActivityName=".ManageCourses" />
         <activity
             android:name=".AddCourseActivity"
             android:label="Add New Course" />
@@ -30,8 +30,7 @@
             android:parentActivityName=".Login" />
         <activity
             android:name=".EditAssignmentActivity"
-            android:label="Edit Assignment"
-            android:parentActivityName=".ManageAssignments" />
+            android:label="Edit Assignment" />
         <activity
             android:name=".EditCourseActivity"
             android:label="Edit Course"
