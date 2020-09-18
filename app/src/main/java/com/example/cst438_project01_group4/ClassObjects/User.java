@@ -5,6 +5,9 @@ import androidx.room.PrimaryKey;
 
 import com.example.cst438_project01_group4.DataBase.AppDatabase;
 
+/**
+ * User class, responsible for keeping track who is logged in and their corresponding courses
+ */
 @Entity(tableName = AppDatabase.USER_TABLE)
 public class User {
     @PrimaryKey(autoGenerate = true)
