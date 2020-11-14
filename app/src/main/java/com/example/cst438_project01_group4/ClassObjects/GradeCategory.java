@@ -5,6 +5,9 @@ import androidx.room.PrimaryKey;
 
 import com.example.cst438_project01_group4.DataBase.AppDatabase;
 
+/**
+ * GradeCategory class, helps calculate the weights of grades
+ */
 @Entity(tableName = AppDatabase.GRADE_CATEGORY_TABLE)
 public class GradeCategory {
     @PrimaryKey(autoGenerate = true)
